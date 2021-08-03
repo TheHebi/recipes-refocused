@@ -1,8 +1,9 @@
 <h1 align="center"><strong>Recipe Forum Site</strong></h1>
 
 <p align="center">
-  <img src="https://img.shields.io/github/repo-size/TheHebi/recipe-forum-site">
-  <img src="https://img.shields.io/badge/License-MIT-yellow.svg">
+    <img src="https://img.shields.io/github/languages/top/TheHebi/recipe-forum-site">
+    <img src="https://img.shields.io/github/repo-size/TheHebi/recipe-forum-site">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg">
 </p>
 
 <h2 align="center">
