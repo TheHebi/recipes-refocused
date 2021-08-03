@@ -59,6 +59,9 @@ Recipe.init({
             key: 'id'
         }
     }
+},
+{
+    sequelize,
 })
 
 module.exports = Recipe;
