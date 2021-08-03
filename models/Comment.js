@@ -2,6 +2,7 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 const Recipe = require("./Recipe")
 const User = require("./User")
+
 class Comment extends Model {}
 
 Comment.init(
