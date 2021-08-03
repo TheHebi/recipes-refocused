@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const recipeRoutes = require("./resipeRoutes");
+const recipeRoutes = require("./recipeRoutes");
 const userRoutes = require("./userRoutes");
 const commentRoutes = require("./commentRoutes");
 
