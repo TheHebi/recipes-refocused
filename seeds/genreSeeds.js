@@ -2,22 +2,73 @@ const Genre = require('../models/Genre');
 
 const genreData = [
   {
-    category_name: 'Breakfast',
+    name: 'Breakfast',
   },
   {
-    category_name: 'Lunch',
+    name: 'Lunch',
   },
   {
-    category_name: 'Dinner',
+    name: 'Dinner',
   },
   {
-    category_name: 'Vegan',
+    name: 'Vegan',
   },
   {
-    category_name: 'Shoes',
+    name: 'Vegetarian',
+  },
+  {
+    name: 'French',
+  },
+  {
+    name: 'Chinese',
+  },
+  {
+    name: 'Japanese',
+  },
+  {
+    name: 'Italian',
+  },
+  {
+    name: 'Greek',
+  },
+  {
+    name: 'Spanish',
+  },
+  {
+    name: 'Mediterranean',
+  },
+  {
+    name: 'Lebanese',
+  },
+  {
+    name: 'Moroccan',
+  },
+  {
+    name: 'Turkish',
+  },
+  {
+    name: 'Thai',
+  },
+  {
+    name: 'Indian',
+  },
+  {
+    name: 'Cajun',
+  },
+  {
+    name: 'Mexican',
+  },
+  {
+    name: 'German',
+  },
+  {
+    name: 'Russian',
+  },
+  {
+    name: 'American',
   },
 ];
 
-const seedCategories = () => Category.bulkCreate(genreData);
+const seedGenres = () => Genre.bulkCreate(genreData);
 
-module.exports = seedCategories;
+module.exports = seedGenres;
