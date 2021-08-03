@@ -3,7 +3,9 @@ const router = express.Router();
 const recipeRoutes = require("./recipeRoutes");
 const userRoutes = require("./userRoutes");
 const commentRoutes = require("./commentRoutes");
+const genreRoutes = require("./genreRoutes");
 
+router.use("/genres",genreRoutes);
 router.use("/comments",commentRoutes);
 router.use("/users",userRoutes);
 router.use("/recipes",recipeRoutes);
