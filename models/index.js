@@ -3,7 +3,8 @@ const Recipe = require("./Recipe");
 const Comment = require("./Comment");
 const Genre = require("./Genre");
 const Instruction = require('./Instruction');
-const Ingredient = require('./Ingredient')
+const Ingredient = require('./Ingredient');
+
 
 User.hasMany(Recipe);
 
@@ -31,7 +32,16 @@ Recipe.belongsTo(User);
 
 Comment.belongsTo(User);
 
-Comment.belongsTo(Recipe)
+Comment.belongsTo(Recipe);
+
+Recipe.belongsToMany(User,{
+    through: 'UserSaved',
+    as: 'SavedUser'
+});
+User.belongsToMany(Recipe, {
+    through: 'UserSaved',
+    as: 'SavedRecipe'
+});
 
 module.exports = {
     User,

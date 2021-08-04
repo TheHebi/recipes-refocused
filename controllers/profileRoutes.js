@@ -110,4 +110,8 @@ router.get("/new", auth, (req, res) => {
   });
 });
 
+router.get("/saved", auth, (req, res)=> {
+  
+})
+
 module.exports = router;

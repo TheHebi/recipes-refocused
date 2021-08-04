@@ -26,7 +26,6 @@ Recipe.init(
       allowNull: false,
     },
   },
-},
   {
     sequelize,
   }
