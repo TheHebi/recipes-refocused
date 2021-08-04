@@ -24,6 +24,7 @@ Recipe.init(
     cook_time: {
       type: DataTypes.INTEGER,
       allowNull: false,
+    },
   },
   {
     sequelize,

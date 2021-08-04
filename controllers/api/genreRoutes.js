@@ -26,9 +26,10 @@ router.get("/:id", async (req, res) => {
       },
       attributes: { exclude: [`createdAt`, `updatedAt`] },
     });
-    res
-      .status(200)
-      .json({ message: genre ? res.json(genre) : `Genre not found.` });
+    if(!genre){
+      res.status(404).json({message: `no genre found with this id`})
+    }
+    res.status(200).json(genre);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -53,9 +54,10 @@ router.delete("/:id", async (req, res) => {
         where: { id: req.params.id },
       });
       console.log(delGenre);
-      res.status(200).json({
-        message: delGenre ? `Genre deleted!` : `Genre not found.`,
-      });
+      if(!delGenre){
+        res.status(404).json({message: `no genre found with this id`})
+      }
+      res.status(200).json({message:"genre deleter"});
     } catch (err) {
       res.status(400).json(err);
     }

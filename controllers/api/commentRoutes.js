@@ -22,9 +22,10 @@ router.get("/:id", async (req, res) => {
       where: { id: req.params.id },
       attributes: { exclude: [`createdAt`, `updatedAt`] },
     });
-    res
-      .status(200)
-      .json({ message: comment ? res.json(comment) : `Comment not found.` });
+    if(!comment){
+      res.status(404).json({message: `no comment found with this id`})
+    }
+    res.status(200).json(comment);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -41,14 +42,17 @@ router.post("/", async (req, res) => {
     res.status(400).json(err);
   }
 });
+
 // update comment by id
 router.put('/:id', async (req, res) => {
     try{
       const editComment = await db.Comment.update(req.body,{
         where: {id:req.params.id},
       })
-      console.log(editComment)
-      res.status(200).json({message:editComment[0] ? `Comment updated!`: `Comment not found.`})
+      if(!editComment){
+        res.status(404).json({message: `no comment found with this id`})
+      }
+      res.status(200).json({message:"comment updated"});
     }catch(err){
       res.status(400).json(err)
     }
@@ -61,9 +65,10 @@ router.delete("/:id", async (req, res) => {
       where: { id: req.params.id },
     });
     console.log(delComment);
-    res.status(200).json({
-      message: delComment ? `Comment deleted!` : `Comment not found.`,
-    });
+    if(!delComment){
+      res.status(404).json({message: `no comment found with this id`})
+    }
+    res.status(200).json({message:`comment deleted`});
   } catch (err) {
     res.status(400).json(err);
   }
