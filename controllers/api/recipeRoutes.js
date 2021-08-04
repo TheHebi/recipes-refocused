@@ -1,5 +1,7 @@
 const express = require("express");
+const sequelize = require("../../config/connection");
 const router = express.Router();
+const Sequelize = require("sequelize");
 const db = require("../../models");
 
 // find all recipes
@@ -40,8 +42,8 @@ router.get("/:id", async (req, res) => {
       ],
       attributes: { exclude: [`createdAt`, `updatedAt`] },
     });
-    if(!oneRecipe){
-      res.status(404).json({message: `no recipe found with this id`})
+    if (!oneRecipe) {
+      res.status(404).json({ message: `no recipe found with this id` });
     }
     res.status(200).json(oneRecipe);
   } catch (err) {
@@ -68,13 +70,53 @@ router.delete("/:id", async (req, res) => {
       where: { id: req.params.id },
     });
     console.log(delRecipe);
-    if(!delRecipe){
-      res.status(404).json({message: `no recipe found with this id`})
+    if (!delRecipe) {
+      res.status(404).json({ message: `no recipe found with this id` });
     }
-    res.status(200).json({message:"recipe deleted"});
+    res.status(200).json({ message: "recipe deleted" });
   } catch (err) {
     res.status(404).json(err);
   }
 });
 
+// upvotes
+router.put(`/upvote/:id`, async (req, res) => {
+  try {
+    const upvote = await db.Recipe.update(
+      {
+        vote: Sequelize.literal(`vote + 1`),
+      },
+      {
+        where: { id: req.params.id },
+      }
+    );
+    res.status(200).json({ message: "recipe upvoted" });
+  } catch (err) {
+    console.log(err);
+    res.status(404).json(err);
+  }
+});
+
+// downvotes
+router.put(`/downvote/:id`, async (req, res) => {
+  try {
+    const downvote = await db.Recipe.findByPk(req.params.id)
+    if (downvote.vote === 0) {
+      res.json({ message: "Votes already at minimun" });
+    } else {
+       await db.Recipe.update(
+        {
+          vote: Sequelize.literal(`vote - 1`),
+        },
+        {
+          where: { id: req.params.id },
+        }
+      );
+      res.status(200).json({ message: "recipe downvoted" });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(404).json(err);
+  }
+});
 module.exports = router;

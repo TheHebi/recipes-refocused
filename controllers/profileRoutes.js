@@ -49,7 +49,7 @@ router.get("/", auth, (req, res) => {
     });
 });
 
-// display one recipe by user
+// display one recipe from user to edit
 router.get("/edit/:id", auth, (req, res) => {
   db.Recipe.findOne({
     where: {
