@@ -18,11 +18,11 @@ Recipe.init(
       allowNull: false,
     },
     prep_time: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     cook_time: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

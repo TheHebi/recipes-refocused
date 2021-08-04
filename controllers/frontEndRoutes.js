@@ -54,11 +54,11 @@ router.get("/recipe/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
-    attributes: ["id", "recipe_name", "recipe_image", "prep_time","cook_time"],
+    attributes: ["id", "recipe_name", "recipe_image", "prep_time","cook_time", "createdAt"],
     include: [
       {
         model: db.Comment,
-        attributes: ["id", "content", "RecipeId", "UserId", "created_at"],
+        attributes: ["id", "content", "RecipeId", "UserId", "createdAt"],
         include: { model: db.User, attributes: ["username"] },
       },
       {
@@ -71,11 +71,11 @@ router.get("/recipe/:id", (req, res) => {
       },
       {
         model: db.Instruction,
-        attributes: ["id", "instruction", "RecipeId"]
+        attributes: ["id", "instruction", "local_step_number", "RecipeId"]
       },
       {
         model: db.Genre,
-        attributes: ["id", "name", "RecipeId", "GenreId"],
+        attributes: ["id", "name"],
       },
     ],
   })
@@ -91,7 +91,8 @@ router.get("/recipe/:id", (req, res) => {
         plain: true,
       });
 
-      res.render("viewRecipe", {
+      // res.status(200).json(post);
+      res.render("recipe", {
         post,
         logged_in: req.session.logged_in,
       });

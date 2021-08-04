@@ -9,6 +9,10 @@ Instruction.init(
             type: DataTypes.TEXT,
             allowNull: false,
         },
+        local_step_number: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        }
     },
     {
         sequelize,
