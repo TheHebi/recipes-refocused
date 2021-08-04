@@ -33,9 +33,10 @@ router.get("/:id", async (req, res) => {
       ],
       attributes: { exclude: [`createdAt`, `updatedAt`] },
     });
-    res
-      .status(200)
-      .json({ message: user ? res.json(user) : `User not found.` });
+    if(!user){
+      res.status(404).json({message: `no user found with this id`})
+    }
+    res.status(200).json(user);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -99,9 +100,10 @@ router.delete("/:id", async (req, res) => {
       where: { id: req.params.id },
     });
     console.log(delUser);
-    res.status(200).json({
-      message: delUser ? `User deleted!` : `User not found.`,
-    });
+    if(!delUser){
+      res.status(404).json({message: `no user found with this id`})
+    }
+    res.status(200).json({message:"user deleted"});
   } catch (err) {
     res.status(400).json(err);
   }

@@ -27,10 +27,6 @@ Recipe.hasMany(Ingredient)
 
 Ingredient.belongsTo(Recipe)
 
-Recipe.hasMany(Instruction)
-
-Instruction.belongsTo(Recipe)
-
 Recipe.belongsTo(User);
 
 Comment.belongsTo(User);

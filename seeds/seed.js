@@ -20,11 +20,11 @@ const seedAll = async () => {
   await seedRecipes();
   console.log('\n----- RECIPES SEEDED -----\n');
   
-  await seedInstructions();
-  console.log('\n----- INSTRUCTIONS SEEDED -----\n');
-
   await seedIngredients();
   console.log('\n----- INGREDIENTS SEEDED -----\n');
+  
+  await seedInstructions();
+  console.log('\n----- INSTRUCTIONS SEEDED -----\n');
 
   await addGenreToRecipe();
   console.log('\n----- INGREDIENTS ATTACHED -----\n');
