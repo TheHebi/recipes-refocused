@@ -21,7 +21,7 @@ Genre.belongsToMany(Recipe,{
 
 Recipe.hasMany(Instruction);
 
-Instruction.belongsToMany(Recipe); 
+Instruction.belongsTo(Recipe); 
 
 Recipe.hasMany(Ingredient)
 

@@ -309,6 +309,6 @@ const ingredientData = [
   },
 ];
 
-const seedUsers = () => Ingredient.bulkCreate(ingredientData);
+const seedIngredients = () => Ingredient.bulkCreate(ingredientData);
 
-module.exports = seedUsers;
+module.exports = seedIngredients;

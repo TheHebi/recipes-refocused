@@ -13,6 +13,7 @@ Comment.init(
           len: [1, 255],
         },
     },
+  },
     {
       sequelize,
     }

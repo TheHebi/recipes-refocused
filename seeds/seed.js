@@ -2,7 +2,7 @@ const seedGenres = require('./genreSeeds');
 const seedComments = require('./commentSeeds');
 const seedUsers = require('./userSeeds');
 const seedRecipes = require('./recipeSeeds');
-const seedInstructions = require('./InstructionSeeds')
+const seedInstructions = require('./instructionSeeds')
 const seedIngredients = require("./ingredientSeeds")
 const addGenreToRecipe = require("./addGenreToRecipe")
 
