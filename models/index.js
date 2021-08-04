@@ -2,22 +2,26 @@ const User = require("./User");
 const Recipe = require("./Recipe");
 const Comment = require("./Comment");
 const Genre = require("./Genre");
-const Ingredient = require("./Ingredient");
-const Instruction = require("./Instruction")
+const Instruction = require('./Instruction');
+const Ingredient = require('./Ingredient')
 
-User.hasMany(Recipe,);
+User.hasMany(Recipe);
 
-User.hasMany(Comment,);
+User.hasMany(Comment);
 
 Recipe.hasMany(Comment);
 
 Recipe.belongsToMany(Genre,{
-    through: `RecipeGenre`
+    through:'RecipeGenre'
 });
 
 Genre.belongsToMany(Recipe,{
     through: `RecipeGenre`
 });
+
+Recipe.hasMany(Instruction);
+
+Instruction.belongsToMany(Recipe); 
 
 Recipe.hasMany(Ingredient)
 
@@ -27,7 +31,7 @@ Recipe.hasMany(Instruction)
 
 Instruction.belongsTo(Recipe)
 
-Recipe.belongsTo(User,);
+Recipe.belongsTo(User);
 
 Comment.belongsTo(User);
 
