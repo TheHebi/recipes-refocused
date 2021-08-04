@@ -2,44 +2,40 @@ const express = require("express");
 const router = express.Router();
 const db = require("../../models");
 
-// find all genres
+// find all instructions
 router.get("/", async (req, res) => {
   try {
-    const genres = await db.Genre.findAll({
+    const instructions = await db.Instruction.findAll({
       attributes: { exclude: [`createdAt`, `updatedAt`] },
     });
-    res.status(200).json(genres);
+    res.status(200).json(instructions);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
-// find one genre by id value including associated recipes
+// find one instruction by id
 router.get("/:id", async (req, res) => {
   try {
-    const genre = await db.Genre.findOne({
+    const instruction = await db.Instruction.findOne({
       where: { id: req.params.id },
-      include: {
-        model: db.Recipe,
-        attributes: { exclude: [`createdAt`, `updatedAt`] },
-      },
       attributes: { exclude: [`createdAt`, `updatedAt`] },
     });
-    if(!genre){
-      res.status(404).json({message: `no genre found with this id`})
+    if(!instruction){
+      res.status(404).json({message: `no instruction found with this id`})
     }
-    res.status(200).json(genre);
+    res.status(200).json(instruction);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
-// create a new genre
+// create a new instruction
 router.post("/", async (req, res) => {
   try {
-    const newGenre = await db.Genre.create(req.body);
+    const newGenre = await db.Instruction.create(req.body);
     res.status(200).json(newGenre);
   } catch (err) {
     console.log(err);
@@ -47,17 +43,17 @@ router.post("/", async (req, res) => {
   }
 });
 
-// delete a genre by id
+// delete a instruction by id
 router.delete("/:id", async (req, res) => {
     try {
-      const delGenre = await db.Genre.destroy({
+      const delGenre = await db.Instruction.destroy({
         where: { id: req.params.id },
       });
       console.log(delGenre);
       if(!delGenre){
-        res.status(404).json({message: `no genre found with this id`})
+        res.status(404).json({message: `no instruction found with this id`})
       }
-      res.status(200).json({message:"genre deleter"});
+      res.status(200).json({message:"instruction deleter"});
     } catch (err) {
       res.status(400).json(err);
     }

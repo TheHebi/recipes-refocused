@@ -18,21 +18,32 @@ router.get("/", async (req, res) => {
 // find one recipe by id value including associated genres and comments
 router.get("/:id", async (req, res) => {
   try {
-    const recipe = await db.Genre.findOne({
+    const oneRecipe = await db.Recipe.findOne({
       where: { id: req.params.id },
-      include: [{
-        model: db.Genre,
-        attributes: { exclude: [`createdAt`, `updatedAt`] },
-      },
-      {
-        model: db.Comment,
-        attributes: { exclude: [`createdAt`, `updatedAt`] },
-      }],
+      include: [
+        {
+          model: db.Genre,
+          attributes: { exclude: [`createdAt`, `updatedAt`] },
+        },
+        {
+          model: db.Ingredient,
+          attributes: { exclude: [`createdAt`, `updatedAt`] },
+        },
+        {
+          model: db.Instruction,
+          attributes: { exclude: [`createdAt`, `updatedAt`] },
+        },
+        {
+          model: db.Comment,
+          attributes: { exclude: [`createdAt`, `updatedAt`] },
+        },
+      ],
       attributes: { exclude: [`createdAt`, `updatedAt`] },
     });
-    res
-      .status(200)
-      .json({ message: recipe ? res.json(recipe) : `Recipe not found.` });
+    if(!oneRecipe){
+      res.status(404).json({message: `no recipe found with this id`})
+    }
+    res.status(200).json(oneRecipe);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -52,17 +63,18 @@ router.post("/", async (req, res) => {
 
 // delete a recipe by id
 router.delete("/:id", async (req, res) => {
-    try {
-      const delRecipe = await db.Recipe.destroy({
-        where: { id: req.params.id },
-      });
-      console.log(delRecipe);
-      res.status(200).json({
-        message: delRecipe ? `Recipe deleted!` : `Recipe not found.`,
-      });
-    } catch (err) {
-      res.status(400).json(err);
+  try {
+    const delRecipe = await db.Recipe.destroy({
+      where: { id: req.params.id },
+    });
+    console.log(delRecipe);
+    if(!delRecipe){
+      res.status(404).json({message: `no recipe found with this id`})
     }
-  });
+    res.status(200).json({message:"recipe deleted"});
+  } catch (err) {
+    res.status(404).json(err);
+  }
+});
 
 module.exports = router;
