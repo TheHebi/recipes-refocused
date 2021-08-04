@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
 // find one recipe by id value including associated genres and comments
 router.get("/:id", async (req, res) => {
   try {
-    const recipe = await db.Genre.findOne({
+    const recipe = await db.Recipe.findOne({
       where: { id: req.params.id },
       include: [{
         model: db.Genre,
@@ -61,7 +61,7 @@ router.delete("/:id", async (req, res) => {
         message: delRecipe ? `Recipe deleted!` : `Recipe not found.`,
       });
     } catch (err) {
-      res.status(400).json(err);
+      res.status(404).json(err);
     }
   });
 

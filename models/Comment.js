@@ -14,21 +14,7 @@ Comment.init(
           isAlphanumeric: true,
           len: [1, 255],
         },
-      },
-      user_id: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: User,
-          key: `id`,
-        },
-      },
-      recipe_id: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: Recipe,
-          key: `id`,
-        },
-      },
+      }
     },
     {
       sequelize,
