@@ -53,7 +53,7 @@ router.delete("/:id", async (req, res) => {
       if(!delGenre){
         res.status(404).json({message: `no instruction found with this id`})
       }
-      res.status(200).json({message:"instruction deleter"});
+      res.status(200).json({message:"instruction deleted"});
     } catch (err) {
       res.status(400).json(err);
     }
