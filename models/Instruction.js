@@ -6,7 +6,7 @@ class Instruction extends Model {}
 Instruction.init(
     {
         instruction: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false,
         },
     },

@@ -21,15 +21,11 @@ Genre.belongsToMany(Recipe,{
 
 Recipe.hasMany(Instruction);
 
-Instruction.belongsToMany(Recipe); 
+Instruction.belongsTo(Recipe); 
 
 Recipe.hasMany(Ingredient)
 
 Ingredient.belongsTo(Recipe)
-
-Recipe.hasMany(Instruction)
-
-Instruction.belongsTo(Recipe)
 
 Recipe.belongsTo(User);
 
