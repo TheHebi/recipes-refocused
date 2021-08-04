@@ -8,7 +8,7 @@ Instruction.init(
         instruction: {
             type: DataTypes.TEXT,
             allowNull: false,
-        },
+        }
     },
     {
         sequelize,
