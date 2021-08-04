@@ -1,42 +1,42 @@
-const Recipe = require('../models/Recipe');
+const Recipe = require("../models/Recipe");
 
 const recipeData = [
   {
-    recipe_image: 'http://placecage.com/g/200/300',
-    recipe_name: 'Lemon garlic butter chicken',
-    prep_time: 10,
-    cook_time: 40,
-  },
-  {
-    recipe_image: 'http://placecage.com/c/200/300',
-    recipe_name: 'French Toast',
+
+    recipe_image: "http://placecage.com/c/200/300",
+    recipe_name: "French Toast",
     prep_time: 20,
     cook_time: 10,
+    userId: 3,
   },
   {
-    recipe_image: 'http://fillmurray.com/200/300',
-    recipe_name: 'French Crepes',
+    recipe_image: "http://fillmurray.com/200/300",
+    recipe_name: "French Crepes",
     prep_time: 10,
     cook_time: 10,
+    userId: 2,
   },
   {
-    recipe_image: 'http://placebear.com/200/300',
-    recipe_name: 'Spaghetti with meat sauce',
+    recipe_image: "http://placebear.com/200/300",
+    recipe_name: "Spaghetti with meat sauce",
     prep_time: 15,
     cook_time: 70,
+    userId: 1,
   },
   {
-    recipe_image: 'http://fillmurray.com/200/300',
-    recipe_name: 'Bavarian Pretzel',
+    recipe_image: "http://fillmurray.com/200/300",
+    recipe_name: "Bavarian Pretzel",
     prep_time: 60,
     cook_time: 15,
+    userId: 4,
   },
   {
-    recipe_image: 'http://fillmurray.com/200/300',
-    recipe_name: 'Cajun Crawfish boil',
+    recipe_image: "http://fillmurray.com/200/300",
+    recipe_name: "Cajun Crawfish boil",
     prep_time: 30,
     cook_time: 120,
-},
+    userId: 2,
+  },
 ];
 
 const seedRecipes = () => Recipe.bulkCreate(recipeData);

@@ -12,7 +12,6 @@ Comment.init(
           isAlphanumeric: true,
           len: [1, 255],
         },
-      },
     },
     {
       sequelize,

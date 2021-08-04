@@ -14,28 +14,34 @@ Recipe.hasMany(Comment);
 Recipe.belongsToMany(Genre,{
     through:'RecipeGenre'
 });
+
 Genre.belongsToMany(Recipe,{
-    through:'RecipeGenre'
+    through: `RecipeGenre`
 });
+
 Recipe.hasMany(Instruction);
 
 Instruction.belongsToMany(Recipe); 
-                        
-Recipe.hasMany(Ingredient);
 
-Ingredient.belongsTo(Recipe);
+Recipe.hasMany(Ingredient)
+
+Ingredient.belongsTo(Recipe)
+
+Recipe.hasMany(Instruction)
+
+Instruction.belongsTo(Recipe)
 
 Recipe.belongsTo(User);
 
 Comment.belongsTo(User);
 
-Comment.belongsTo(Recipe);
+Comment.belongsTo(Recipe)
 
 module.exports = {
     User,
     Recipe,
     Comment,
     Genre,
-    Instruction,
-    Ingredient
+    Ingredient,
+    Instruction
 }
