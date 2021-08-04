@@ -21,18 +21,6 @@ Recipe.init(
         len: (1, 50),
       },
     },
-    recipe_ingredients: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    recipe_author: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      references: {
-        model: User,
-        key: "username",
-      },
-    },
     prep_time: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -40,24 +28,6 @@ Recipe.init(
     cook_time: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    recipe_howto: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    user_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: User,
-        key: "id",
-      },
-    },
-    genre_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: Genre,
-        key: "id",
-      },
     },
   },
   {

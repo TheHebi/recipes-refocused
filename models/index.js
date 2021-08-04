@@ -2,33 +2,40 @@ const User = require("./User");
 const Recipe = require("./Recipe");
 const Comment = require("./Comment");
 const Genre = require("./Genre");
+const Instruction = require('./Instruction');
+const Ingredient = require('./Ingredient')
 
-User.hasMany(Recipe,{
-    foreignKey: `user_id`
+User.hasMany(Recipe);
+
+User.hasMany(Comment);
+
+Recipe.hasMany(Comment);
+
+Recipe.belongsToMany(Genre,{
+    through:'RecipeGenre'
 });
-User.hasMany(Comment,{
-    foreignKey:`user_id`
+Genre.belongsToMany(Recipe,{
+    through:'RecipeGenre'
 });
-Recipe.hasMany(Comment,{
-    foreignKey: `recipe_id`
-});
-Recipe.hasMany(Genre);
-Genre.hasMany(Recipe,{
-    foreignKey:`genre_id`
-})
-Recipe.belongsTo(User,{
-    foreignKey: `user_id`
-});
-Comment.belongsTo(User,{
-    foreignKey:`user_id`
-});
-Comment.belongsTo(Recipe,{
-    foreignKey:`recipe_id`
-})
+Recipe.hasMany(Instruction);
+
+Instruction.belongsToMany(Recipe); 
+                        
+Recipe.hasMany(Ingredient);
+
+Ingredient.belongsTo(Recipe);
+
+Recipe.belongsTo(User);
+
+Comment.belongsTo(User);
+
+Comment.belongsTo(Recipe);
 
 module.exports = {
     User,
     Recipe,
     Comment,
-    Genre
+    Genre,
+    Instruction,
+    Ingredient
 }
