@@ -7,21 +7,10 @@
   box-sizing: border-box;
 }
 
-.custom-wrapper-all {
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-}
-
 .custom-tab {
   border: 1px solid #dbd8ce;
   border-bottom: none;
   border-radius: 10px 10px 0 0;
-}
-
-.custom-tab-create {
-  border: 1px solid #dbd8ce;
-  border-radius: 10px;
 }
 
 .custom-tab-footer {
@@ -75,8 +64,8 @@ input[type="number"]::-webkit-outer-spin-button {
     padding: 0 !important;
 
     display: flex;
-    /* justify-content: center;
-    align-items: center; */
+    justify-content: center;
+    align-items: center;
   }
   .custom-tab {
     /* padding: 0 !important; */
@@ -95,13 +84,6 @@ input[type="number"]::-webkit-outer-spin-button {
     display: none;
   }
   #recipe-title {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .custom-tab-footer {
-    border-radius: 0 0 0 0;
+    text-align: center;
   }
 }
