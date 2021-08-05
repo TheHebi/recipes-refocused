@@ -2,7 +2,6 @@ const Recipe = require("../models/Recipe");
 
 const recipeData = [
   {
-
     recipe_image: "https://unsplash.com/photos/AhZJjvvDIGY",
     recipe_name: "French Toast",
     prep_time: `${Math.floor(Math.random() * 60)} hr ${Math.floor(Math.random() * 60)} min`,

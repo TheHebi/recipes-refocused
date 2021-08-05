@@ -25,6 +25,10 @@ Recipe.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    vote:{
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    }
   },
   {
     sequelize,
