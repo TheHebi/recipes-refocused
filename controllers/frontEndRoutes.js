@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
     include: [
       {
         model: db.Comment,
-        attributes: ["id", "content", "RecipeId", "UserId", "createdAt"],
+        attributes: ["id", "content", "createdAt"],
         include: { model: db.User, attributes: ["username"] },
       },
       {
@@ -68,7 +68,7 @@ router.get("/recipe/:id", (req, res) => {
     include: [
       {
         model: db.Comment,
-        attributes: ["id", "content", "RecipeId", "UserId", "createdAt"],
+        attributes: ["id", "content", "createdAt"],
         include: { model: db.User, attributes: ["username"] },
       },
       {
