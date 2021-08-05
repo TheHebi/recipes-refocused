@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
     include: [
       {
         model: db.Comment,
-        attributes: ["id", "content", "createdAt"],
+        attributes: ["id", "content", "RecipeId", "UserId", "createdAt"],
         include: { model: db.User, attributes: ["username"] },
       },
       {
@@ -32,6 +32,12 @@ router.get("/", (req, res) => {
         model: db.Genre,
         attributes: ["id", "name"],
       },
+      {
+        model: db.Recipe,
+        as: `SavedRecipe`,
+        attributes: {exclude: [`createdAt`, `updatedAt`]},
+        through:{attributes: {exclude: [`createdAt`,`updatedAt`]}}
+      }
     ],
   })
     .then((recipeData) => {
@@ -41,7 +47,7 @@ router.get("/", (req, res) => {
         })
       );
 
-      res.render("home", {
+      res.render("index", {
         posts,
         logged_in: req.session.logged_in,
       });
@@ -75,12 +81,18 @@ router.get("/recipe/:id", (req, res) => {
       },
       {
         model: db.Instruction,
-        attributes: ["id", "instruction", "local_step_number", "RecipeId"]
+        attributes: ["id", "instruction", "local_step_number"]
       },
       {
         model: db.Genre,
         attributes: ["id", "name"],
       },
+      {
+        model: db.Recipe,
+        as: `SavedRecipe`,
+        attributes: {exclude: [`createdAt`, `updatedAt`]},
+        through:{attributes: {exclude: [`createdAt`,`updatedAt`]}}
+      }
     ],
   })
     .then((recipeData) => {

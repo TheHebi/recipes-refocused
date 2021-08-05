@@ -30,6 +30,12 @@ router.get("/:id", async (req, res) => {
           model: db.Comment,
           attributes: { exclude: [`createdAt`, `updatedAt`] },
         },
+        {
+          model: db.Recipe,
+          as: `SavedRecipe`,
+          attributes: {exclude: [`createdAt`, `updatedAt`]},
+          through:{attributes: {exclude: [`createdAt`,`updatedAt`]}}
+        }
       ],
       attributes: { exclude: [`createdAt`, `updatedAt`] },
     });
@@ -108,5 +114,7 @@ router.delete("/:id", async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+
 
 module.exports = router;
