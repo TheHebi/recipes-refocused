@@ -18,7 +18,7 @@ router.get("/", auth, (req, res) => {
       },
       {
         model: db.User,
-        attributes: ["username"],
+        attributes: ["username"]
       },
       {
         model: db.Ingredient,
@@ -122,8 +122,6 @@ router.get("/create", (req, res) => {
   });
 });
 
-router.get("/saved", auth, (req, res)=> {
-  
-})
+
 
 module.exports = router;
