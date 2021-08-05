@@ -13,25 +13,31 @@ router.get("/", auth, (req, res) => {
     include: [
       {
         model: db.Comment,
-        attributes: ["id", "content", "RecipeId", "UserId", "created_at"],
+        attributes: ["id", "content", "createdAt"],
         include: { model: db.User, attributes: ["username"] },
       },
       {
         model: db.User,
-        attributes: ["username"],
+        attributes: ["username"]
       },
       {
         model: db.Ingredient,
-        attributes: ["id", "amount", "unit", "name", "RecipeId"]
+        attributes: ["id", "amount", "unit", "name"]
       },
       {
         model: db.Instruction,
-        attributes: ["id", "instruction", "RecipeId"]
+        attributes: ["id", "instruction"]
       },
       {
         model: db.Genre,
-        attributes: ["id", "name", "RecipeId", "GenreId"],
+        attributes: ["id", "name"],
       },
+      {
+        model: db.Recipe,
+        as: `SavedRecipe`,
+        attributes: {exclude: [`createdAt`, `updatedAt`]},
+        through:{attributes: {exclude: [`createdAt`,`updatedAt`]}}
+      }
     ],
   })
     .then((recipesData) => {
@@ -49,7 +55,7 @@ router.get("/", auth, (req, res) => {
     });
 });
 
-// display one recipe by user
+// display one recipe from user to edit
 router.get("/edit/:id", auth, (req, res) => {
   db.Recipe.findOne({
     where: {
@@ -59,7 +65,7 @@ router.get("/edit/:id", auth, (req, res) => {
     include: [
       {
         model: db.Comment,
-        attributes: ["id", "content", "RecipeId", "UserId", "created_at"],
+        attributes: ["id", "content", "createdAt"],
         include: { model: db.User, attributes: ["username"] },
       },
       {
@@ -68,16 +74,22 @@ router.get("/edit/:id", auth, (req, res) => {
       },
       {
         model: db.Ingredient,
-        attributes: ["id", "amount", "unit", "name", "RecipeId"]
+        attributes: ["id", "amount", "unit", "name"]
       },
       {
         model: db.Instruction,
-        attributes: ["id", "instruction", "RecipeId"]
+        attributes: ["id", "instruction"]
       },
       {
         model: db.Genre,
-        attributes: ["id", "name", "RecipeId", "GenreId"],
+        attributes: ["id", "name"],
       },
+      {
+        model: db.Recipe,
+        as: `SavedRecipe`,
+        attributes: {exclude: [`createdAt`, `updatedAt`]},
+        through:{attributes: {exclude: [`createdAt`,`updatedAt`]}}
+      }
     ],
   })
     .then((recipeData) => {
@@ -109,5 +121,7 @@ router.get("/create", (req, res) => {
     logged_in: true,
   });
 });
+
+
 
 module.exports = router;
