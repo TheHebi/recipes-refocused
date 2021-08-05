@@ -2,7 +2,7 @@ const Recipe = require("../models/Recipe");
 
 const recipeData = [
   {
-    recipe_image: "http://placecage.com/c/200/300",
+    recipe_image: "https://unsplash.com/photos/AhZJjvvDIGY",
     recipe_name: "French Toast",
     prep_time: 20,
     cook_time: 10,
