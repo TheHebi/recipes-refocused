@@ -104,8 +104,8 @@ router.get("/edit/:id", auth, (req, res) => {
 });
 
 // new recipe from user
-router.get("/new", auth, (req, res) => {
-  res.render("addPost", {
+router.get("/create", (req, res) => {
+  res.render("create", {
     logged_in: true,
   });
 });

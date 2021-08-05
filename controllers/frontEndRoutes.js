@@ -2,6 +2,10 @@ const router = require("express").Router();
 const sequelize = require("../config/connection");
 const db = require("../models");
 
+// ============================================
+// RECIPE VIEWERS AND CREATORS AND EDITORS
+// ============================================
+
 // homepage with all recipes
 router.get("/", (req, res) => {
   db.Recipe.findAll({
@@ -54,7 +58,7 @@ router.get("/recipe/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
-    attributes: ["id", "recipe_name", "recipe_image", "prep_time","cook_time"],
+    attributes: ["id", "recipe_name", "recipe_image", "prep_time","cook_time", "createdAt"],
     include: [
       {
         model: db.Comment,
@@ -71,7 +75,7 @@ router.get("/recipe/:id", (req, res) => {
       },
       {
         model: db.Instruction,
-        attributes: ["id", "instruction"]
+        attributes: ["id", "instruction", "local_step_number"]
       },
       {
         model: db.Genre,
@@ -91,7 +95,8 @@ router.get("/recipe/:id", (req, res) => {
         plain: true,
       });
 
-      res.render("viewRecipe", {
+      // res.status(200).json(post);
+      res.render("recipe", {
         post,
         logged_in: req.session.logged_in,
       });
@@ -101,6 +106,41 @@ router.get("/recipe/:id", (req, res) => {
       res.status(500).json(err);
     });
 });
+
+// serve create recipe page
+router.get("/create", (req, res) => {
+  res.render("create", {
+    logged_in: true,
+  });
+});
+
+// process new recipe
+router.post('/create', async (req, res) => {
+  // TODO: add functionality for checking whether user is logged in
+  try {
+    // process image to cloudinary
+
+
+    // post to mysql db
+    const newRecipe = await db.Recipe.create({
+      recipe_image: imgURL,
+      recipe_name: req.body.recipe_name,
+      prep_time: req.body.prep_time,
+      cook_time: req.body.cook_time,
+      UserId: 2, // req.session.userId or whatever the parameter is called
+    });
+
+
+    res.status(200).json(newRecipe);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  };
+});
+
+// ============================================
+// LOGIN MANAGEMENT
+// ============================================
 
 // login
 router.get("/login", (req, res) => {

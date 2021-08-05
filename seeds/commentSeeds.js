@@ -33,7 +33,7 @@ const commentData = [
   },
   {
     content:"I'm going to make this for dinner tonight!",
-    user_id: 3,
+    UserId: 3,
     RecipeId: 4
   },
   {
