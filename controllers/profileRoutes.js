@@ -18,7 +18,7 @@ router.get("/", auth, (req, res) => {
       },
       {
         model: db.User,
-        attributes: ["username", "UserSaved","SavedRecipe"]
+        attributes: ["username"]
       },
       {
         model: db.Ingredient,
