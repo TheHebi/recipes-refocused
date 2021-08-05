@@ -1,0 +1,16 @@
+<a href="/recipe/{{id}}" class="list-group-item d-flex justify-content-between">
+    <div class="col-md-3">
+        <img class="rounded img-fluid" src="{{recipe_image}}">
+    </div>
+    <div class="d-flex flex-column">
+        <h3 class="text-center">{{recipe_name}}</h3>
+        {{#each Genres as |genre|}}
+        <p class="text-center">{{genre.name}}</p>
+        {{/each}}
+
+    </div>
+    <div class="d-flex align-items-center">
+        <small><i class="fas fa-chevron-right"></i></small>
+    </div>
+</a>
+</a>
