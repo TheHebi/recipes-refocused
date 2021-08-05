@@ -6,7 +6,6 @@ const seedSavedRecipe = async () =>{
     await u1.addSavedRecipe(1)
     const u2 = users[1]
     await u2.addSavedRecipe([1,4])
-    console.log(u2)
     const u3 = users[2]
     await u3.addSavedRecipe([2,3,5])
     const u4 = users[3]
