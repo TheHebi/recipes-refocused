@@ -54,10 +54,6 @@ const prepTime = document.querySelector('#prep-time');
 const cookTime = document.querySelector('#cook-time');
 const createPostForm = document.querySelector('#create-recipe-form');
 
-// for image handling - work in progress
-let imgURL = null;
-let blobFiles = null;
-
 // =====================================================================
 // FUNCTION DEFINITIONS
 // =====================================================================
@@ -233,57 +229,118 @@ const deleteGenreHandler = (event) => {
 const submitFormHandler = async (event) => {
     event.preventDefault();
 
-    // Grab values and build post body
+    // CHECK FOR AT LEAST ONE INGREDIENT AND ONE STEP
     const ingredientList = document.querySelector('#ingredientList');
-    for (let i = 0; i < ingredientList.children.length; i++) {
-        const newIngredientArray = [];
-        const quant = ingredientList.children[i].children[0].children[0].value;
-        const unit = ingredientList.children[i].children[0].children[1].value;
-        const ingredient = ingredientList.children[i].children[0].children[2].value;
-
-        newIngredientArray.push([quant, unit, ingredient].join(' '));
-    };
-
     const stepList = document.querySelector('#step-list');
-    for (let i = 0; i < stepList.children.length; i++) {
-        const newStepArray = [];
-        newStepArray.push(stepList.children[i].children[1].value);
+    if (ingredientList.children.length === 0) {
+        alert('Please enter at least one ingredient!');
+        return
+    } else if (stepList.children.length === 0) {
+        alert('Please enter at least one step!');
+        return
     };
 
-    const postObj = {
+    // Grab values and build post body
+    const newIngredientArray = [];
+    for (let i = 0; i < ingredientList.children.length; i++) {
+        const amountHTML = ingredientList.children[i].children[0].children[0].value;
+        const unitHTML = ingredientList.children[i].children[0].children[1].value;
+        const nameHTML = ingredientList.children[i].children[0].children[2].value;
+
+        if (amountHTML && nameHTML) {
+            newIngredientArray.push({
+                amount: amountHTML,
+                unit: unitHTML,
+                name: nameHTML,
+            });
+        };
+    };
+    if (newIngredientArray.length === 0) {
+        alert('Please enter at least one ingredient!');
+        return
+    };
+
+
+    const newStepArray = [];
+    for (let i = 0; i < stepList.children.length; i++) {
+        const step = stepList.children[i].children[1].value;
+        if (step) {
+            newStepArray.push(step);
+        };
+    };
+    if (newStepArray.length === 0) {
+        alert('Please enter at least one step!');
+        return
+    }
+
+    const recipeObj = {
         recipe_name: document.querySelector('#recipe-title').value,
         recipe_url: imgUrl,
         prep_time: document.querySelector('#prep-time').value,
         cook_time: document.querySelector('#cook-time').value,
         genre_id: genreArray,
-        recipe_ingredients: newIngredientArray,
-        recipe_howto: newStepArray,
     };
+    // console.log(recipeObj)
     
-    console.log(postObj)
-
-    // POST TO SERVER
-    const recipeRes = await fetch('', {
+    // POST RECIPE TO SERVER
+    let recipeRes = await fetch('/create', {
         method: 'POST',
-        body: JSON.stringify(postObj),
+        body: JSON.stringify(recipeObj),
+        headers: {
+            "Content-Type":"application/json"
+        },
+    });
+    recipeResJSON = await recipeRes.json();
+    
+    // POST INSTRUCTIONS TO SERVER
+    const stepObj = {
+        RecipeId: recipeResJSON.id,
+        recipe_howto: newStepArray
+    };
+
+    const instructRes = await fetch('/createInstructs', {
+        method: 'POST',
+        body: JSON.stringify(stepObj),
         headers: {
             "Content-Type":"application/json"
         },
     });
 
-    const instructRes = await fetch('', {
+    // POST INGREDIENTS TO SERVER
+    const ingredObj = {
+        RecipeId: recipeResJSON.id,
+        recipe_ingredients: newIngredientArray,
+    };
+    const ingredRes = await fetch('/createIngredients', {
         method: 'POST',
-        body: JSON.stringify({
-            RecipeId: rrecipeRes.id
-        })
+        body: JSON.stringify(ingredObj),
+        headers: {
+            "Content-Type":"application/json"
+        },
     })
 
-    if (res.status === 200) {
+    // POST TAGS TO SERVER
+    let tagResOk = true;
+    let tagResStatus = 0;
+    if (genreArray.length > 0) {
+        const tagRes = await fetch('/addTags', {
+            method: 'POST',
+            body: JSON.stringify({
+                RecipeId: recipeResJSON.id,
+                recipe_genres: genreArray,
+            }),
+            headers: {
+                "Content-Type":"application/json"
+            },
+        });
+        tagResOk = tagRes.ok;
+        tagResStatus = tagRes.status;
+    };
+
+    if (recipeRes.ok && instructRes.ok && ingredRes.ok && tagResOk) {
         // redirect to recipe page
-    } else if (res.status === 403) {
-        alert('Please log in before making a post!');
-        // redirect to login page
-    } else if (res.status === 500) {
+        location.replace(`/recipe/${recipeResJSON.id}`)
+    }  else if (recipeRes.status === 500 || instructRes.status === 500 || ingredRes.status === 500 || tagResStatus === 500) {
         // grab server error message
         alert('Something went wrong...');
     };

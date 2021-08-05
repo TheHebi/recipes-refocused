@@ -10,10 +10,12 @@ let saved = false;
 // document.querySelector('#saved').style.display = 'none'; // hidden by default
 
 // Set image height to instructions card height
-const clientHeight = document.querySelector('#card-right').children[0].children[0].clientHeight;
-const recipeImage = document.querySelector('#recipe-image');
-recipeImage.style.height = `${clientHeight}px`;
-recipeImage.style.objectFit = 'cover';
+if (document.querySelector('#recipe-image')) {
+    const clientHeight = document.querySelector('#card-right').children[0].children[0].clientHeight;
+    const recipeImage = document.querySelector('#recipe-image');
+    recipeImage.style.height = `${clientHeight}px`;
+    recipeImage.style.objectFit = 'cover';
+};
 
 // ==================================================================================
 // FUNCTIONS

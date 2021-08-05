@@ -3,7 +3,7 @@ const Recipe = require("../models/Recipe");
 const recipeData = [
   {
 
-    recipe_image: "https://unsplash.com/photos/AhZJjvvDIGY",
+    recipe_image: "https://res.cloudinary.com/dwz0bmbpa/image/upload/v1628137516/Recipe%20Blog%20Assets/omar-al-ghosson-AhZJjvvDIGY-unsplash_i0jzpj.jpg",
     recipe_name: "French Toast",
     prep_time: `${Math.floor(Math.random() * 60)} hr ${Math.floor(Math.random() * 60)} min`,
     cook_time: `${Math.floor(Math.random() * 60)} hr ${Math.floor(Math.random() * 60)} min`,

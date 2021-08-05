@@ -37,10 +37,18 @@
                 </div>
             </div>
             <hr class="my-3">
+            {{#if post.recipe_image}}
             <div class="row m-2">
+            {{/if}}
+            {{#unless post.recipe_image}}
+            <div class="row m-2 justify-content-center"
+            {{/unless}}
+                {{!-- SERVE DIFFERENT LAYOUTS IF THERE IS AN IMAGE OR NOT --}}
+                {{#if post.recipe_image}}
                 <div class="card col-12 col-lg-6" id="card-image-upload">
                     <img src="{{post.recipe_image}}" class="img-fluid rounded" id="recipe-image">
                 </div>
+                {{/if}}
                 <div class="col-12 col-lg-6 ps-5 d-flex justify-content-center align-items-center" id="card-right">
                     <div class="row" style="width: 100%;">
                         <div class="card">
