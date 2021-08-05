@@ -1,4 +1,40 @@
 // =====================================================================
+// CLOUDINARY WIDGET INIT
+// =====================================================================
+
+let imgUrl = null; // global var init
+const widget = cloudinary.createUploadWidget({
+    cloudName: "dwz0bmbpa", 
+    uploadPreset: "oetjkfou",
+    sources: ['local', 'url', 'google_drive'],
+    multiple: false,
+}, (err, result) => {
+    if (err) {
+        console.log(err);
+    };
+    if (result) {
+        if (result.event === 'success') {
+            // uploads
+            // const filename = result.info.original_filename;
+            imgUrl = result.info.secure_url;
+
+            // html assets
+            document.querySelector('#svgoutput').style.display = 'none';
+            document.querySelector('#imgUpload').style.display = 'none';
+
+            const recipeImage = document.querySelector('#output');
+	        recipeImage.src = imgUrl;
+
+            const clientHeight = document.getElementById('card-right').clientHeight;
+            recipeImage.style.height = `${clientHeight}px`;
+            recipeImage.style.objectFit = 'cover';
+            recipeImage.style.borderBottomLeftRadius = '3px';
+            recipeImage.style.borderBottomRightRadius = '3px';
+        };
+    };
+});
+
+// =====================================================================
 // VARIABLE INIT
 // =====================================================================
 
@@ -26,27 +62,8 @@ let blobFiles = null;
 // FUNCTION DEFINITIONS
 // =====================================================================
 
-const imageUploadHandler = (event) => {
-    // event.preventDefault;
-
-    // Hide placeholder
-    const placeHolderImage = document.querySelector('#svgoutput');
-    placeHolderImage.style.display = 'none';
-
-    // Show new image
-    const recipeImage = document.querySelector('#output');
-    imgURL = URL.createObjectURL(event.target.files[0]);
-    blobFiles = event.target.files
-	recipeImage.src = URL.createObjectURL(event.target.files[0]);
-
-    // Grab neighboring div height and set to that
-    const clientHeight = document.getElementById('card-right').clientHeight;
-    recipeImage.style.height = `${clientHeight}px`;
-    recipeImage.style.objectFit = 'cover';
-    recipeImage.style.borderBottomLeftRadius = '10px';
-    recipeImage.style.borderBottomRightRadius = '10px';
-
-    console.log(recipeImage);
+const imageUploadHandler = () => {
+    widget.open();
 };
 
 const ingredientCreateHandler = () => {
@@ -219,40 +236,57 @@ const submitFormHandler = async (event) => {
     // Grab values and build post body
     const ingredientList = document.querySelector('#ingredientList');
     for (let i = 0; i < ingredientList.children.length; i++) {
+        const newIngredientArray = [];
         const quant = ingredientList.children[i].children[0].children[0].value;
         const unit = ingredientList.children[i].children[0].children[1].value;
         const ingredient = ingredientList.children[i].children[0].children[2].value;
 
-        ingredientArray.push([quant, unit, ingredient].join(' '));
+        newIngredientArray.push([quant, unit, ingredient].join(' '));
     };
 
     const stepList = document.querySelector('#step-list');
     for (let i = 0; i < stepList.children.length; i++) {
-        stepArray.push(stepList.children[i].children[1].value);
+        const newStepArray = [];
+        newStepArray.push(stepList.children[i].children[1].value);
     };
 
     const postObj = {
         recipe_name: document.querySelector('#recipe-title').value,
+        recipe_url: imgUrl,
         prep_time: document.querySelector('#prep-time').value,
         cook_time: document.querySelector('#cook-time').value,
         genre_id: genreArray,
-        recipe_ingredients: ingredientArray,
-        recipe_howto: stepArray,
+        recipe_ingredients: newIngredientArray,
+        recipe_howto: newStepArray,
     };
     
     console.log(postObj)
 
     // POST TO SERVER
-    // const res = await fetch('', {
-    //     method: 'POST',
-    //     body: JSON.stringify(postObj),
-    //     headers: {
-    //         "Content-Type":"application/json"
-    //     },
-    // });
+    const recipeRes = await fetch('', {
+        method: 'POST',
+        body: JSON.stringify(postObj),
+        headers: {
+            "Content-Type":"application/json"
+        },
+    });
 
-    // REDIRECT TO RECIPE PAGE)
+    const instructRes = await fetch('', {
+        method: 'POST',
+        body: JSON.stringify({
+            RecipeId: rrecipeRes.id
+        })
+    })
 
+    if (res.status === 200) {
+        // redirect to recipe page
+    } else if (res.status === 403) {
+        alert('Please log in before making a post!');
+        // redirect to login page
+    } else if (res.status === 500) {
+        // grab server error message
+        alert('Something went wrong...');
+    };
 };
 
 // =====================================================================
@@ -264,7 +298,7 @@ const genreList = document.querySelector('#genre-list');
 const ingredientList = document.querySelector('#ingredientList');
 
 // listeners to change HTML
-imageUploader.addEventListener('input', imageUploadHandler);
+imageUploader.addEventListener('click', imageUploadHandler);
 ingredientButton.addEventListener('click', ingredientCreateHandler);
 ingredientList.addEventListener('click', ingredientDeleteHandler);
 stepButton.addEventListener('click', stepCreateHandler);

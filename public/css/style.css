@@ -19,6 +19,11 @@
   border-radius: 10px 10px 0 0;
 }
 
+.custom-tab-create {
+  border: 1px solid #dbd8ce;
+  border-radius: 10px;
+}
+
 .custom-tab-footer {
   border: 1px solid #dbd8ce;
   border-radius: 0 0 10px 10px;
