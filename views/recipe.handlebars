@@ -1,10 +1,5 @@
-<nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1">Navbar</span>
-    </div>
-</nav>
-
 {{!-- <div> --}}
+<p id="recipe-id" style="display: none;">{{post.id}}</p>
 <main class="container custom-wrapper-all">
     <div class="row d-flex justify-content-center">
         <div class="col-12 d-flex flex-column m-5 mb-0 p-5 custom-tab">
@@ -37,10 +32,13 @@
                 </div>
             </div>
             <hr class="my-3">
-            <div class="row m-2">
+            <div class="row m-2{{#unless post.recipe_image}} justify-content-center{{/unless}}">
+                {{!-- SERVE DIFFERENT LAYOUTS IF THERE IS AN IMAGE OR NOT --}}
+                {{#if post.recipe_image}}
                 <div class="card col-12 col-lg-6" id="card-image-upload">
                     <img src="{{post.recipe_image}}" class="img-fluid rounded" id="recipe-image">
                 </div>
+                {{/if}}
                 <div class="col-12 col-lg-6 ps-5 d-flex justify-content-center align-items-center" id="card-right">
                     <div class="row" style="width: 100%;">
                         <div class="card">
@@ -90,9 +88,10 @@
         {{/unless}}
     </div>
         
-    <div class="row d-flex justify-content-center mb-5">
-        <div class="col-10 col-lg-8 d-flex flex-column" id="commentList">
-            <p class="mb-0">Comment as USERNAME:</p>
+    <div class="row d-flex justify-content-center mb-5" id="comments">
+        <div class="col-10 col-lg-8 d-flex flex-column">
+            {{#if logged_in}}
+            <p class="mb-0">Comment as {{username}}:</p>
             <form class="d-flex flex-column mb-3">
                 <textarea class="form-control" name="comment-body" id="comment-box" rows="4" placeholder="Share your thoughts!"></textarea>
                 <div class="d-flex justify-content-end mt-2">
@@ -102,6 +101,7 @@
                 </div>
             </form>
             <hr class="my-3">
+            {{/if}}
             <div id="comment-list">
                 {{#each post.Comments as |comment|}}
                 <div class="card my-2">

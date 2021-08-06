@@ -1,0 +1,22 @@
+<main class="container mt-4 custom-wrapper-all">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-6 col-sm-12 d-flex flex-column">
+            <div class="col-12 my-2">
+                <a href="/create" class="btn w-100 btn-danger" id="homeAddBtn"><i class="fas fa-plus"></i> Add
+                    Recipe</a>
+            </div>
+            <div class="col-12">
+                <div class="card bg-warning">
+                    <h3 class="text-center p-2">Recipe List</h3>
+                </div>
+            </div>
+
+            <div class="list-group mb-5">
+                {{#each posts as |post|}}
+                {{> post-info}}
+                {{/each}}
+            </div>
+
+        </div>
+    </div>
+</main>
