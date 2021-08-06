@@ -83,7 +83,8 @@ router.post("/login", (req, res) => {
       );
       if (isPasswordCorrect) {
         req.session.save(() => {
-          req.session.user_id = user.id
+          req.session.user_id = user.id;
+          req.session.username = user.username;
           req.session.loggedIn = true;
           res.json(user);
         });

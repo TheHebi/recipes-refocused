@@ -2,7 +2,6 @@
 // CLOUDINARY WIDGET INIT
 // =====================================================================
 
-let imgUrl = null; // global var init
 const widget = cloudinary.createUploadWidget({
     cloudName: "dwz0bmbpa", 
     uploadPreset: "oetjkfou",
@@ -16,7 +15,7 @@ const widget = cloudinary.createUploadWidget({
         if (result.event === 'success') {
             // uploads
             // const filename = result.info.original_filename;
-            imgUrl = result.info.secure_url;
+            var imgUrl = result.info.secure_url;
 
             // html assets
             document.querySelector('#svgoutput').style.display = 'none';
@@ -52,7 +51,7 @@ const addGenreButton = document.querySelector('#add-genre-btn');
 
 const prepTime = document.querySelector('#prep-time');
 const cookTime = document.querySelector('#cook-time');
-const createPostForm = document.querySelector('#create-recipe-form');
+const createRecipeButton = document.querySelector('#create-recipe-btn');
 
 // =====================================================================
 // FUNCTION DEFINITIONS
@@ -275,22 +274,27 @@ const submitFormHandler = async (event) => {
 
     const recipeObj = {
         recipe_name: document.querySelector('#recipe-title').value,
-        recipe_url: imgUrl,
+        recipe_url: (document.querySelector('#output').src !== '') ? document.querySelector('#output').src : null,
         prep_time: document.querySelector('#prep-time').value,
         cook_time: document.querySelector('#cook-time').value,
         genre_id: genreArray,
     };
-    // console.log(recipeObj)
-    
+    console.log(recipeObj)
     // POST RECIPE TO SERVER
-    let recipeRes = await fetch('/create', {
+    const recipeRes = await fetch('/create', {
         method: 'POST',
         body: JSON.stringify(recipeObj),
         headers: {
             "Content-Type":"application/json"
         },
     });
-    recipeResJSON = await recipeRes.json();
+    const recipeResJSON = await recipeRes.json();
+    console.log(recipeRes.status)
+    if (recipeRes.status !== 200) {
+        alert('Something went wrong with your recipe...');
+        console.log(recipeRes);
+        return
+    };
     
     // POST INSTRUCTIONS TO SERVER
     const stepObj = {
@@ -305,6 +309,12 @@ const submitFormHandler = async (event) => {
             "Content-Type":"application/json"
         },
     });
+    console.log(instructRes.status)
+    if (instructRes.status !== 200) {
+        alert('Something went wrong with your instructions...');
+        console.log(instructRes);
+        return
+    };
 
     // POST INGREDIENTS TO SERVER
     const ingredObj = {
@@ -317,7 +327,13 @@ const submitFormHandler = async (event) => {
         headers: {
             "Content-Type":"application/json"
         },
-    })
+    });
+    console.log(ingredRes.status)
+    if (ingredRes.status !== 200) {
+        alert('Something went wrong with your ingredients...');
+        console.log(ingredRes);
+        return
+    };
 
     // POST TAGS TO SERVER
     let tagResOk = true;
@@ -336,7 +352,8 @@ const submitFormHandler = async (event) => {
         tagResOk = tagRes.ok;
         tagResStatus = tagRes.status;
     };
-
+    console.log(recipeRes)
+    console.log(recipeRes.ok, instructRes.ok, ingredRes.ok, tagResOk)
     if (recipeRes.ok && instructRes.ok && ingredRes.ok && tagResOk) {
         // redirect to recipe page
         location.replace(`/recipe/${recipeResJSON.id}`)
@@ -365,4 +382,4 @@ genreList.addEventListener('click', deleteGenreHandler);
 
 
 // submit form
-createPostForm.addEventListener('submit', submitFormHandler);
+createRecipeButton.addEventListener('click', submitFormHandler);

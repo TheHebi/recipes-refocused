@@ -1,7 +1,7 @@
 // ==================================================================================
 // INIT VARIABLES AND SET UP
 // ==================================================================================
-
+const current_recipe_id = parseInt(document.querySelector('#recipe-id').innerHTML);
 const commentList = document.querySelector('#comment-list');
 
 let saved = false;
@@ -21,9 +21,25 @@ if (document.querySelector('#recipe-image')) {
 // FUNCTIONS
 // ==================================================================================
 const commentFormHandler = async (event) => {
-    event.preventDefault();
-    // log new comment to database
+    // event.preventDefault();
+    console.log(typeof(document.querySelector('#comment-box').value.trim()))
+    if (document.querySelector('#comment-box').value === '') {
+        alert('Cannot submit an empty comment!');
+        return
+    };
 
+    // log new comment to database
+    await fetch('/createComment', {
+        method: 'POST',
+        body: JSON.stringify({
+            content: document.querySelector('#comment-box').value.trim(),
+            recipe_id: current_recipe_id,
+        }),
+        headers: {
+            "Content-Type":"application/json"
+        },
+    });
+    location.replace(`/recipe/${current_recipe_id}/#comments`);
 };
 
 // const upvoteHandler = () => {
@@ -46,10 +62,12 @@ const saveHandler = () => {
         document.querySelector('#unsaved').style.display = 'flex';
         saved = false;
         console.log('red')
-    }
+    };
 };
 
-document.querySelector('#add-comment-btn').addEventListener('click', commentFormHandler);
+if (document.querySelector('#add-comment-btn')) {
+    document.querySelector('#add-comment-btn').addEventListener('click', commentFormHandler);
+};
 // document.querySelector('#like-btn').addEventListener('click', upvoteHandler);
 // saveBtn.addEventListener('click', saveHandler);
 // unsaveBtn.addEventListener('click', saveHandler);

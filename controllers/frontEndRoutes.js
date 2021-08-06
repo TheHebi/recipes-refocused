@@ -32,12 +32,6 @@ router.get("/", (req, res) => {
         model: db.Genre,
         attributes: ["id", "name"],
       },
-      {
-        model: db.Recipe,
-        as: `SavedRecipe`,
-        attributes: {exclude: [`createdAt`, `updatedAt`]},
-        through:{attributes: {exclude: [`createdAt`,`updatedAt`]}}
-      }
     ],
   })
     .then((recipeData) => {
@@ -49,67 +43,6 @@ router.get("/", (req, res) => {
 
       res.render("index", {
         posts,
-        logged_in: req.session.logged_in,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
-
-// click on recipe to view it
-router.get("/recipe/:id", (req, res) => {
-  db.Recipe.findOne({
-    where: {
-      id: req.params.id,
-    },
-    attributes: ["id", "recipe_name", "recipe_image", "prep_time","cook_time", "createdAt"],
-    include: [
-      {
-        model: db.Comment,
-        attributes: ["id", "content", "createdAt"],
-        include: { model: db.User, attributes: ["username"] },
-      },
-      {
-        model: db.User,
-        attributes: ["username"],
-      },
-      {
-        model: db.Ingredient,
-        attributes: ["id", "amount", "unit", "name"]
-      },
-      {
-        model: db.Instruction,
-        attributes: ["id", "instruction", "local_step_number"]
-      },
-      {
-        model: db.Genre,
-        attributes: ["id", "name"],
-      },
-      {
-        model: db.Recipe,
-        as: `SavedRecipe`,
-        attributes: {exclude: [`createdAt`, `updatedAt`]},
-        through:{attributes: {exclude: [`createdAt`,`updatedAt`]}}
-      }
-    ],
-  })
-    .then((recipeData) => {
-      if (!recipeData) {
-        res.status(404).json({
-          message: "No recipe found with this id",
-        });
-        return;
-      }
-
-      const post = recipeData.get({
-        plain: true,
-      });
-
-      // res.status(200).json(post);
-      res.render("recipe", {
-        post,
         logged_in: req.session.logged_in,
       });
     })
