@@ -1,0 +1,33 @@
+<main class="container my-4 custom-wrapper-all">
+    <div class="row justify-content-center">
+        <div class="col-12 d-flex flex-wrap justify-content-center px-2">
+            <div class="col-5 mx-2">
+                <div class="col-12">
+                    <div class="card bg-success">
+                        <h3 class="text-center p-2">My Recipe List</h3>
+                    </div>
+                </div>
+
+                <div class="list-group mb-5">
+                    {{#each myRecipeJSON}}
+                    {{> dashboard-my-list}}
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="col-5 mx-2">
+                <div class="col-12">
+                    <div class="card bg-primary">
+                        <h3 class="text-center p-2">Saved Recipe List</h3>
+                    </div>
+                </div>
+
+                <div class="list-group mb-5">
+                    {{#each savedRecipeJSON.SavedRecipe}}
+                    {{> dashboard-my-list}}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
