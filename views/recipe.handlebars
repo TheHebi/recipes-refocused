@@ -27,8 +27,8 @@
                         <h4>By {{post.User.username}} - {{format_date post.createdAt}}</h4>
                     </div>
                 </div>
-                <div id="back-btn">
-                    <button type="button" class="btn btn-lg btn-danger mx-3"><i class="fas fa-chevron-left"></i> Go Back</button>
+                <div>
+                    <button type="button" class="btn btn-lg btn-danger mx-3" id="back-btn"><i class="fas fa-chevron-left"></i> Go Back</button>
                 </div>
             </div>
             <hr class="my-3">
@@ -91,7 +91,7 @@
         
     <div class="row d-flex justify-content-center mb-5" id="comments">
         <div class="col-10 col-lg-8 d-flex flex-column">
-            {{#if logged_in}}
+            {{#if loggedIn}}
             <p class="mb-0">Comment as {{username}}:</p>
             <form class="d-flex flex-column mb-3">
                 <textarea class="form-control" name="comment-body" id="comment-box" rows="4" placeholder="Share your thoughts!"></textarea>

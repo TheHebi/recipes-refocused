@@ -50,7 +50,7 @@ router.get("/recipe/:id", (req, res) => {
     const recipeOwner = (post.User.id === req.session.user_id);
     res.render("recipe", {
         post,
-        logged_in: req.session.loggedIn,
+        loggedIn: req.session.loggedIn,
         username: req.session.username,
         recipe_owner: recipeOwner
     });
@@ -58,6 +58,33 @@ router.get("/recipe/:id", (req, res) => {
         console.log(err);
         res.status(500).json(err);
     });
+});
+
+// check session user's saved recipes
+router.get('/savedRecipes', async (req, res) => {
+    try {
+        if (req.session.user_id) {
+            const savedUsers = await db.User.findByPk(req.session.user_id, {
+                include: [
+                    {
+                        model: db.Recipe,
+                        as: `SavedRecipe`,
+                        attributes: {exclude: [`createdAt`, `updatedAt`]},
+                        through:{attributes: {exclude: [`createdAt`,`updatedAt`]}}
+                    },
+                ],
+            });
+            const savedUsersJSON = savedUsers.get({ plain: true });
+            res.status(200).json(savedUsersJSON);
+        } else {
+            res.status(403).json({
+                message: 'User not logged in.'
+            });
+        };
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    };
 });
 
 // delete a recipe

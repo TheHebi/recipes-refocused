@@ -57,6 +57,13 @@ const recipeDeleteHandler = async () => {
     };
 };
 
+const saveHandler = () => {
+    // IF COMMENT IS NOT YET SAVED - CREATE SAVE
+
+    // IF COMMENT IS SAVED - DELETE SAVE
+};
+
+
 // const commentDeleteHandler = async (event) => {
 //     const res = await fetch (`/comment/${}`, {
 //         method: 'DELETE',
@@ -71,21 +78,6 @@ const recipeDeleteHandler = async () => {
 //     console.log(likeCount)
 // };
 
-const saveHandler = () => {
-    if (saved === false) {
-        // display correct button
-        document.querySelector('#unsaved').style.display = 'none';
-        document.querySelector('#saved').style.display = 'flex';
-        saved = true;
-        console.log('blue')
-    } else {
-        // display correct button
-        document.querySelector('#saved').style.display = 'none';
-        document.querySelector('#unsaved').style.display = 'flex';
-        saved = false;
-        console.log('red')
-    };
-};
 
 // ==================================================================================
 // EVENT LISTENERS
@@ -98,6 +90,10 @@ if (document.querySelector('#recipe-delete-btn')) {
 if (document.querySelector('#add-comment-btn')) {
     document.querySelector('#add-comment-btn').addEventListener('click', commentFormHandler);
 };
+
+document.querySelector('#back-btn').addEventListener('click', () => {
+    history.back();
+});
 // document.querySelector('#like-btn').addEventListener('click', upvoteHandler);
 // saveBtn.addEventListener('click', saveHandler);
 // unsaveBtn.addEventListener('click', saveHandler);
