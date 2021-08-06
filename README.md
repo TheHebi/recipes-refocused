@@ -12,7 +12,7 @@
 
 ## Description:
 
-Ready to trim the fat? //WEBSITE NAME// is the newer, faster way explore recipes. On this site all recipes follow the same format so you can get right to learning new kitchen techniques instead of wading through pages of history. Posts are available for anyone to view, but if you'd like to interact with our awesome community, be sure to create an account!
+Ready to trim the fat? Recipes Refocused is the newer, faster way explore recipes. On this site all recipes follow the same format so you can get right to learning new kitchen techniques instead of wading through pages of history. Posts are available for anyone to view, but if you'd like to interact with our awesome community, be sure to create an account!
 
 ## Table of Contents
 
@@ -29,8 +29,13 @@ Ready to trim the fat? //WEBSITE NAME// is the newer, faster way explore recipes
 ## Contributors
 
 <a href="https://github.com/kcmuse">Kaleb Muse</a>
+
 <a href="https://github.com/rhwlffk1028">Kevin Choi</a>
+
 <a href="https://github.com/kkolyvek">Koppi Kolyvek</a>
+
+<a href="https://github.com/TheHebi">Nathaniel Turcotte</a>
+
 
 ## Quesions
 
