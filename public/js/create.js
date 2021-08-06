@@ -378,6 +378,10 @@ stepList.addEventListener('click', stepDeleteHandler);
 addGenreButton.addEventListener('click', addGenreHandler);
 genreList.addEventListener('click', deleteGenreHandler);
 
+document.querySelector('#cancel-btn').addEventListener('click', () => {
+    history.back();
+});
+
 
 // submit form
 createRecipeButton.addEventListener('click', submitFormHandler);
