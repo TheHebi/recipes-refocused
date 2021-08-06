@@ -70,6 +70,9 @@ router.get('/savedRecipes', async (req, res) => {
                         model: db.Recipe,
                         as: `SavedRecipe`,
                         attributes: {exclude: [`createdAt`, `updatedAt`]},
+                        include: {
+                            model: db.Genre
+                        },
                         through:{attributes: {exclude: [`createdAt`,`updatedAt`]}}
                     },
                 ],
