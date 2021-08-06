@@ -1,9 +1,6 @@
 <main class="container mt-4 custom-wrapper-all">
     <div class="row justify-content-center">
         <div class="col-lg-8 col-md-6 col-sm-12 d-flex flex-column">
-            <div>
-                <h2>Welcome {{User.username}}</h2>
-            </div>
             <div class="col-12 my-2">
                 <a href="/create" class="btn w-100 btn-danger"><i class="fas fa-plus"></i> Add
                     Recipe</a>
@@ -14,7 +11,7 @@
                 </div>
             </div>
 
-            <div class="list-group">
+            <div class="list-group mb-5">
                 {{#each myPosts}}
                 {{> dashboard-my-list}}
                 {{/each}}
