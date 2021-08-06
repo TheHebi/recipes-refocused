@@ -87,6 +87,30 @@ router.get('/savedRecipes', async (req, res) => {
     };
 });
 
+// add a saved recipe
+router.post('/savedRecipes', async (req, res) => {
+    try {
+        const saveUser = await db.User.findByPk(req.session.user_id);
+        await saveUser.addSavedRecipe(req.body.recipeId);
+        res.status(200).json(saveUser.get({plain:true}))
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+// remove a saved recipe
+router.delete('/savedRecipes', async (req, res) => {
+    try {
+        const saveUser = await db.User.findByPk(req.session.user_id);
+        await saveUser.removeSavedRecipe(req.body.recipeId);
+        res.status(200).json(saveUser.get({plain:true}))
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
 // delete a recipe
 router.delete('/recipe/:id', async (req, res) => {
     try {
