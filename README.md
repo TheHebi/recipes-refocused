@@ -1,4 +1,4 @@
-<h1 align="center"><strong>Recipe Forum Site</strong></h1>
+<h1 align="center"><strong>Recipes Refocused</strong></h1>
 
 <p align="center">
     <img src="https://img.shields.io/github/languages/top/TheHebi/recipe-forum-site">
@@ -19,25 +19,43 @@ Ready to trim the fat? Recipes Refocused is the newer, faster way explore recipe
 
 ## Table of Contents
 
-- [Installation](#installation)
 - [Instructions](#instructions)
 - [Contributors](#contributors)
 - [Questions](#questions)
 - [License](#license)
 
-## Installation
-
 ## Instructions
+
+1. Follow <a href="">this link</a> to navigate to Recipes Refocused.
+2. On the landing page you can view recipes, sign-up for an account, or log into your account fi you already have one.
+3. When you click on a recipe you will be redirected to the recipes page where you will see all of the reipes information.
+4. If you are logged into your account, you can leave a comment on a recipe, save the recipe to your account, or "like" the recipe.
+5. Logged In users will have four buttons in the nav bar: Home, Create Recipe, Dashboard, and Logout
+6. Users can create a new recipe by clicking on the Create Recipe button, this will navigate you to the create recipe page where you will see inputs for the following information:
+    * Recipe Title
+    * Recipe Genre Tags
+    * An upload button to add an image to your recipe
+    * Prep Time
+    * Cook Time
+    * Ingredients
+    * Steps 
+7. Clicking the Post Recipe button will save the recipe to the server, you can also click the Cancel button to stop saving the recipe at any time.
+8. Clicking on the Home button will navigate you to the homepage.
+9. Clicking on the Dashboard button will navigate you to your own dashboard page where you can:
+    * View recipes you have posted
+    * View recipes you have clicked the Save button on
+    * Create a new recipe
+10. When you are done using the site, don't forget to log out.
 
 ## Contributors
 
-* <a href="https://github.com/kcmuse">Kaleb Muse</a>
+* <a href="https://github.com/rhwlffk1028">Kevin Choi</a> - Frontend
 
-* <a href="https://github.com/rhwlffk1028">Kevin Choi</a>
+* <a href="https://github.com/kkolyvek">Koppi Kolyvek</a> - Frontend
 
-* <a href="https://github.com/kkolyvek">Koppi Kolyvek</a>
+* <a href="https://github.com/kcmuse">Kaleb Muse</a> - Backend
 
-* <a href="https://github.com/TheHebi">Nathaniel Turcotte</a>
+* <a href="https://github.com/TheHebi">Nathaniel Turcotte</a> - Backend
 
 
 ## Quesions
