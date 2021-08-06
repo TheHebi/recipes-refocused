@@ -2,8 +2,11 @@
 
 <p align="center">
     <img src="https://img.shields.io/github/languages/top/TheHebi/recipe-forum-site">
+    <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/TheHebi/recipe-forum-site">
+    <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/TheHebi/recipe-forum-site">
     <img src="https://img.shields.io/github/repo-size/TheHebi/recipe-forum-site">
     <img src="https://img.shields.io/badge/License-MIT-yellow.svg">
+    <img alt="Maintenance" src="https://img.shields.io/maintenance/yes/2021">
 </p>
 
 <h2 align="center">
@@ -28,13 +31,13 @@ Ready to trim the fat? Recipes Refocused is the newer, faster way explore recipe
 
 ## Contributors
 
-<a href="https://github.com/kcmuse">Kaleb Muse</a>
+* <a href="https://github.com/kcmuse">Kaleb Muse</a>
 
-<a href="https://github.com/rhwlffk1028">Kevin Choi</a>
+* <a href="https://github.com/rhwlffk1028">Kevin Choi</a>
 
-<a href="https://github.com/kkolyvek">Koppi Kolyvek</a>
+* <a href="https://github.com/kkolyvek">Koppi Kolyvek</a>
 
-<a href="https://github.com/TheHebi">Nathaniel Turcotte</a>
+* <a href="https://github.com/TheHebi">Nathaniel Turcotte</a>
 
 
 ## Quesions
