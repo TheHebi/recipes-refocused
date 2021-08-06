@@ -27,7 +27,7 @@ Ready to trim the fat? Recipes Refocused is the newer, faster way explore recipe
 ## Instructions
 
 1. Follow <a href="">this link</a> to navigate to Recipes Refocused.
-2. On the landing page you can view recipes, sign-up for an account, or log into your account fi you already have one.
+2. On the landing page you can view recipes, sign-up for an account, or log into your account if you already have one.
 3. When you click on a recipe you will be redirected to the recipes page where you will see all of the reipes information.
 4. If you are logged into your account, you can leave a comment on a recipe, save the recipe to your account, or "like" the recipe.
 5. Logged In users will have four buttons in the nav bar: Home, Create Recipe, Dashboard, and Logout
