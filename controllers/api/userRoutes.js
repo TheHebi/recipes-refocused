@@ -35,6 +35,12 @@ router.get("/:id", async (req, res) => {
           as: `SavedRecipe`,
           attributes: {exclude: [`createdAt`, `updatedAt`]},
           through:{attributes: {exclude: [`createdAt`,`updatedAt`]}}
+        },
+        {
+          model: db.Recipe,
+          as: `LikedRecipe`,
+          attributes: {exclude: [`createdAt`, `updatedAt`]},
+          through:{attributes: {exclude: [`createdAt`,`updatedAt`]}}
         }
       ],
       attributes: { exclude: [`createdAt`, `updatedAt`] },
