@@ -23,12 +23,12 @@ const commentData = [
   },
   {
     content:"This looks delicious!",
-    UserId: 2,
+    UserId: 1,
     RecipeId: 2
   },
   {
     content:"My family will love this recipe!",
-    UserId: 1,
+    UserId: 2,
     RecipeId: 3
   },
   {

@@ -79,12 +79,6 @@ router.get("/edit/:id", auth, (req, res) => {
         model: db.Genre,
         attributes: ["id", "name"],
       },
-      {
-        model: db.Recipe,
-        as: `SavedRecipe`,
-        attributes: {exclude: [`createdAt`, `updatedAt`]},
-        through:{attributes: {exclude: [`createdAt`,`updatedAt`]}}
-      }
     ],
   })
     .then((recipeData) => {
