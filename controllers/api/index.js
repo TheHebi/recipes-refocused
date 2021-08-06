@@ -7,7 +7,6 @@ const genreRoutes = require("./genreRoutes");
 const ingredientRoutes = require("./ingredientRoutes");
 const instructionRoutes = require("./instructionRoutes");
 
-
 router.use("/genres",genreRoutes);
 router.use("/instructions",instructionRoutes);
 router.use("/ingredients",ingredientRoutes);
