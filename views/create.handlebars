@@ -1,13 +1,7 @@
-<nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1">Navbar</span>
-    </div>
-</nav>
-
 <main class="container m-5 custom-wrapper-all">
     <div class="row">
         <div class="col-12 d-flex flex-column m-5 p-5 custom-tab-create">
-            <form id="create-recipe-form">
+            {{!-- <form id="create-recipe-form"> --}}
                 <div class="d-flex justify-content-between">
                     <input class="form-control form-control-lg" type="text" placeholder="Title" aria-label="title input box" style="width: 50%;" required id="recipe-title">
                     <button type="button" class="btn btn-lg btn-danger mx-3"><i class="fas fa-chevron-left"></i> Cancel</button>
@@ -47,18 +41,17 @@
                 <div class="row m-2">
                     <div class="card col-12 col-lg-5" id="card-image-upload">
                         <!-- THIS IS A PLACEHOLDER IMAGE UNTIL THE USER UPLOADS THEIR OWN -->
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false" id="svgoutput" style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+                        {{!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false" id="svgoutput" style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
                             <title>Placeholder</title>
                             <rect width="100%" height="100%" fill="#868e96"></rect>
                         </svg>
-                        <!-- END OF PLACEHOLDER IMAGE -->
+                        <!-- END OF PLACEHOLDER IMAGE --> --}}
                         <img id="output" alt="" class="card-img-top">
-                        <div class="card-body position-absolute bottom-0" style="width: 100%; padding: 0; margin: 0;">
-                            {{!-- <div class="input-group">
-                                <input type="file" name="image" class="form-control custom-img-input" id="imgUpload" accept="image/*" style="border-top-right-radius: 0; border-top-left-radius: 0;">
-                            </div> --}}
+                        {{!-- <div class="card-body position-absolute bottom-0" style="width: 100%; padding: 0; margin: 0;">
+                            
                             <button id="imgUpload" class="p-3 bg-light" style="border: 1px solid black; width: 100%; border-radius: 0 0 3px 3px;">Upload an Image</button>
-                        </div>
+                        </div> --}}
+                        <button id="imgUpload" class="p-3">Upload an Image</button>
                     </div>
                     <div class="col-12 col-lg-7 ps-5 d-flex justify-content-center align-items-center" id="card-right">
                         <div class="row">
@@ -102,12 +95,12 @@
                         <div id="step-list">
                             <div class="input-group d-flex align-items-center my-2">
                                 <h5>1.</h5>
-                                <input type="text" class="form-control mx-3" id="stepInput" placeholder="Dice the onions...">
+                                <input type="text" class="form-control mx-3" placeholder="Dice the onions...">
                                 <button class="btn-close mx-3" data-id="0"></button>
                             </div>
                             <div class="input-group d-flex align-items-center my-2">
                                 <h5>2.</h5>
-                                <input type="text" class="form-control mx-3" id="stepInput" placeholder="Season the onions...">
+                                <input type="text" class="form-control mx-3" placeholder="Season the onions...">
                                 <button class="btn-close mx-3" data-id="1"></button>
                             </div>
                         </div>
@@ -118,9 +111,9 @@
                 </div>
                 <hr class="my-5">
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-warning">Post Recipe!</button>
+                    <button type="submit" class="btn btn-warning" id="create-recipe-btn">Post Recipe!</button>
                 </div>
-            </form>
+            {{!-- </form> --}}
         </div>
     </div>
 </main>

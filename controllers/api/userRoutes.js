@@ -53,12 +53,11 @@ router.get("/:id", async (req, res) => {
 router.post("/", (req, res) => {
   db.User.create(req.body)
     .then((newUser) => {
-      req.session.user = {
-        id: newUser.id,
-        username: newUser.username,
-        email: newUser.email,
-      };
-      res.json(newUser);
+      req.session.save(() => {
+        req.session.user_id = newUser.id;
+        req.session.loggedIn = true;
+        res.json(newUser);
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -83,13 +82,13 @@ router.post("/login", (req, res) => {
         user.password
       );
       if (isPasswordCorrect) {
-        req.session.user = {
-          id: user.id,
-          username: user.username,
-          email: user.email,
-          loggedIn: true,
-        };
-        res.json(user);
+        req.session.save(() => {
+          req.session.user_id = user.id;
+          req.session.username = user.username;
+          req.session.loggedIn = true;
+          res.json(user);
+        });
+        
       } else {
         res.status(403).json({
           message: "incorrect username or password",
@@ -97,6 +96,17 @@ router.post("/login", (req, res) => {
       }
     }
   });
+});
+
+router.post('/logout', (req, res) => {
+  if (req.session.loggedIn) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  }
+  else {
+    res.status(404).end();
+  }
 });
 
 // delete a user by id
@@ -114,7 +124,5 @@ router.delete("/:id", async (req, res) => {
     res.status(400).json(err);
   }
 });
-
-
 
 module.exports = router;
