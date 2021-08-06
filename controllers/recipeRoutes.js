@@ -114,6 +114,69 @@ router.delete('/savedRecipes', async (req, res) => {
     }
 });
 
+// check session user's liked recipes
+router.get('/likedRecipes', async (req, res) => {
+    try {
+        if (req.session.user_id) {
+            const likedUsers = await db.User.findByPk(req.session.user_id, {
+                include: [
+                    {
+                        model: db.Recipe,
+                        as: `LikedRecipe`,
+                        attributes: {exclude: [`createdAt`, `updatedAt`]},
+                        through:{attributes: {exclude: [`createdAt`,`updatedAt`]}}
+                    },
+                ],
+            });
+            const likedUsersJSON = likedUsers.get({ plain: true });
+            res.status(200).json(likedUsersJSON);
+        } else {
+            res.status(403).json({
+                message: 'User not logged in.'
+            });
+        };
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    };
+});
+
+// add a liked recipe
+router.post('/likedRecipes', async (req, res) => {
+    try {
+        const likeUser = await db.User.findByPk(req.session.user_id);
+        await likeUser.addLikedRecipe(req.body.recipeId);
+        res.status(200).json(likeUser.get({plain:true}))
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+// remove a liked recipe
+router.delete('/likedRecipes', async (req, res) => {
+    try {
+        const likeUser = await db.User.findByPk(req.session.user_id);
+        await likeUser.removeLikedRecipe(req.body.recipeId);
+        res.status(200).json(likeUser.get({plain:true}))
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+// count total likes
+router.get('/likedRecipesCount/:id', async (req, res) => {
+    try {
+        const recipe = await db.Recipe.findByPk(req.params.id);
+        const likeCount = await recipe.countLikedUser();
+        res.status(200).json(likeCount)
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    };
+});
+
 // delete a recipe
 router.delete('/recipe/:id', async (req, res) => {
     try {

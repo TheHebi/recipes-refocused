@@ -6,6 +6,7 @@ const seedInstructions = require('./instructionSeeds')
 const seedIngredients = require("./ingredientSeeds")
 const addGenreToRecipe = require("./addGenreToRecipe")
 const seedSavedRecipe = require('./savedRecipe')
+const seedLikedRecipe = require('./likedRecipe')
 
 const sequelize = require('../config/connection');
 
@@ -36,6 +37,9 @@ const seedAll = async () => {
 
   await seedSavedRecipe();
   console.log('\n----- SAVEDRECIPE SEEDED -----\n');
+  
+  await seedLikedRecipe();
+  console.log('\n----- LIKEDRECIPE SEEDED -----\n');
 
   process.exit(0);
 };
