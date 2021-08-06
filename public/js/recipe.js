@@ -27,6 +27,29 @@ const checkSave = async () => {
 };
 checkSave();
 
+// check for liked status
+const likeBtn = document.querySelector('#like-button');
+const checkLike = async () => {
+    const res = await fetch('/likedRecipes');
+    const resJSON = await res.json();
+    
+    let likedIndex = 0;
+    let liked = false;
+    for (let i=0; i<resJSON.LikedRecipe.length; i++) {
+        if (resJSON.LikedRecipe[i].id === current_recipe_id) {
+            likedIndex = resJSON.LikedRecipe[i].id;
+            liked = true;
+        };
+    };
+
+    if (liked) {
+        likeBtn.classList.remove('btn-secondary');
+        likeBtn.classList.add('btn-success');
+        likeBtn.innerHTML = '<i class="far fa-thumbs-up"></i> Liked!';
+    };
+};
+checkLike();
+
 
 // Set image height to instructions card height
 if (document.querySelector('#recipe-image')) {
@@ -140,6 +163,69 @@ const saveHandler = async () => {
     };
 };
 
+const likeHandler = async () => {
+    const res = await fetch('/likedRecipes');
+    const resJSON = await res.json();
+
+    let likedIndex = 0;
+    let liked = false;
+    for (let i=0; i<resJSON.LikedRecipe.length; i++) {
+        if (resJSON.LikedRecipe[i].id === current_recipe_id) {
+            likedIndex = resJSON.LikedRecipe[i].id;
+            liked = true;
+        };
+    };
+
+    // IF RECIPE IS NOT LIKED - SAVE
+    if (!liked) {
+        // server
+        const addRes = await fetch('/likedRecipes', {
+            method: 'POST',
+            body: JSON.stringify({
+                recipeId: current_recipe_id,
+            }),
+            headers: {
+                "Content-Type":"application/json"
+            }
+        });
+
+        if (addRes.ok) {
+            // html
+            likeBtn.classList.remove('btn-secondary');
+            likeBtn.classList.add('btn-success');
+            likeBtn.innerHTML = '<i class="far fa-thumbs-up"></i> Liked!';
+        } else {
+            alert('Error liking recipe...');
+        };
+
+    // IF RECIPE IS SAVED - DELETE SAVE
+    } else {
+        // server
+        const delRes = await fetch('/likedRecipes', {
+            method: 'DELETE',
+            body: JSON.stringify({
+                recipeId: current_recipe_id,
+            }),
+            headers: {
+                "Content-Type":"application/json"
+            }
+        });
+
+        if (delRes.ok) {
+            // html
+            likeBtn.classList.remove('btn-secondary');
+            likeBtn.classList.add('btn-success');
+            likeBtn.innerHTML = '<i class="far fa-thumbs-up"></i> Liked!';
+        } else {
+            alert('Error un-liking recipe...');
+        };
+
+        // html
+        likeBtn.classList.remove('btn-success');
+        likeBtn.classList.add('btn-secondary');
+        likeBtn.innerHTML = '<i class="far fa-thumbs-up"></i> Like Recipe';
+    };
+};
 
 // const commentDeleteHandler = async (event) => {
 //     const res = await fetch (`/comment/${}`, {
@@ -147,13 +233,6 @@ const saveHandler = async () => {
 //     });
 //     location.replace(`/recipe/${current_recipe_id}/#comments`);
 // }
-
-// const upvoteHandler = () => {
-//     const likeCount = document.querySelector('#like-btn').children[1].innerHTML;
-    
-//     document.querySelector('#like-btn').children[0].style.background = 'blue'
-//     console.log(likeCount)
-// };
 
 
 // ==================================================================================
@@ -177,6 +256,9 @@ document.querySelector('#back-btn').addEventListener('click', () => {
 
 // Save recipe button functionality
 saveBtn.addEventListener('click', saveHandler);
+
+// Like recipe button functionality
+likeBtn.addEventListener('click', likeHandler);
 
 // document.querySelector('#like-btn').addEventListener('click', upvoteHandler);
 // unsaveBtn.addEventListener('click', saveHandler);
