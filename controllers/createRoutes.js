@@ -3,13 +3,13 @@ const sequelize = require("../config/connection");
 const db = require("../models");
 
 // ============================================
-// RECIPE CREATION (AND EDITING)
+// RECIPE CREATION
 // ============================================
 
 // serve create recipe page
 router.get("/create", (req, res) => {
     res.render("create", {
-        logged_in: true,
+        loggedIn: req.session.loggedIn,
     });
 });
   
@@ -86,8 +86,14 @@ router.post('/createIngredients', async (req, res) => {
   
 // process tags
 router.post('/addTags', async (req, res) => {
-    const recipe = await db.Recipe.findByPk(req.body.RecipeId);
-    recipe.addGenre(req.body.recipe_genres);
+    try {
+        const recipe = await db.Recipe.findByPk(req.body.RecipeId);
+        recipe.addGenre(req.body.recipe_genres);
+        res.status(200).json(recipe.get({plain:true}))
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
 });
 
 // ============================================
@@ -114,6 +120,8 @@ router.post('/createComment', async (req, res) => {
         res.status(500).json(err);
     };
 });
+
+//
 
 //Export//
 module.exports = router;

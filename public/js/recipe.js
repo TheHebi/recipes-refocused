@@ -42,6 +42,28 @@ const commentFormHandler = async (event) => {
     location.replace(`/recipe/${current_recipe_id}/#comments`);
 };
 
+const recipeDeleteHandler = async () => {
+    if (confirm("Are you sure you'd like to delete this recipe?")) {
+        const res = await fetch(`/recipe/${current_recipe_id}`, {
+            method: 'DELETE',
+        });
+        if (res.ok) {
+            location.replace('/dashboard');
+        } else {
+            alert('Failed to delete recipe');
+        };
+    } else {
+        return
+    };
+};
+
+// const commentDeleteHandler = async (event) => {
+//     const res = await fetch (`/comment/${}`, {
+//         method: 'DELETE',
+//     });
+//     location.replace(`/recipe/${current_recipe_id}/#comments`);
+// }
+
 // const upvoteHandler = () => {
 //     const likeCount = document.querySelector('#like-btn').children[1].innerHTML;
     
@@ -63,6 +85,14 @@ const saveHandler = () => {
         saved = false;
         console.log('red')
     };
+};
+
+// ==================================================================================
+// EVENT LISTENERS
+// ==================================================================================
+
+if (document.querySelector('#recipe-delete-btn')) {
+    document.querySelector('#recipe-delete-btn').addEventListener('click', recipeDeleteHandler);
 };
 
 if (document.querySelector('#add-comment-btn')) {

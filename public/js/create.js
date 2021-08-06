@@ -18,7 +18,6 @@ const widget = cloudinary.createUploadWidget({
             var imgUrl = result.info.secure_url;
 
             // html assets
-            document.querySelector('#svgoutput').style.display = 'none';
             document.querySelector('#imgUpload').style.display = 'none';
 
             const recipeImage = document.querySelector('#output');
@@ -289,7 +288,7 @@ const submitFormHandler = async (event) => {
         },
     });
     const recipeResJSON = await recipeRes.json();
-    console.log(recipeRes.status)
+    // console.log(recipeRes.status)
     if (recipeRes.status !== 200) {
         alert('Something went wrong with your recipe...');
         console.log(recipeRes);
@@ -309,7 +308,7 @@ const submitFormHandler = async (event) => {
             "Content-Type":"application/json"
         },
     });
-    console.log(instructRes.status)
+    // console.log(instructRes.status)
     if (instructRes.status !== 200) {
         alert('Something went wrong with your instructions...');
         console.log(instructRes);
@@ -328,7 +327,7 @@ const submitFormHandler = async (event) => {
             "Content-Type":"application/json"
         },
     });
-    console.log(ingredRes.status)
+    // console.log(ingredRes.status)
     if (ingredRes.status !== 200) {
         alert('Something went wrong with your ingredients...');
         console.log(ingredRes);
@@ -336,8 +335,8 @@ const submitFormHandler = async (event) => {
     };
 
     // POST TAGS TO SERVER
-    let tagResOk = true;
-    let tagResStatus = 0;
+    var tagResOk = true;
+    var tagResStatus = 0;
     if (genreArray.length > 0) {
         const tagRes = await fetch('/addTags', {
             method: 'POST',
@@ -352,8 +351,7 @@ const submitFormHandler = async (event) => {
         tagResOk = tagRes.ok;
         tagResStatus = tagRes.status;
     };
-    console.log(recipeRes)
-    console.log(recipeRes.ok, instructRes.ok, ingredRes.ok, tagResOk)
+    
     if (recipeRes.ok && instructRes.ok && ingredRes.ok && tagResOk) {
         // redirect to recipe page
         location.replace(`/recipe/${recipeResJSON.id}`)

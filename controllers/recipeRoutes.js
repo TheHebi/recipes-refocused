@@ -21,7 +21,7 @@ router.get("/recipe/:id", (req, res) => {
             },
             {
                 model: db.User,
-                attributes: ["username"],
+                attributes: ["id", "username"],
             },
             {
                 model: db.Ingredient,
@@ -47,16 +47,54 @@ router.get("/recipe/:id", (req, res) => {
     const post = recipeData.get({plain: true});
   
     // res.status(200).json(post);
+    const recipeOwner = (post.User.id === req.session.user_id);
     res.render("recipe", {
         post,
         logged_in: req.session.loggedIn,
         username: req.session.username,
+        recipe_owner: recipeOwner
     });
     }).catch((err) => {
         console.log(err);
         res.status(500).json(err);
     });
 });
+
+// delete a recipe
+router.delete('/recipe/:id', async (req, res) => {
+    try {
+        // delete chosen recipe
+        const recipeDelete = db.Recipe.destroy({
+            where: {
+                id: req.params.id
+            }
+        });
+        // const recipeDeleteJSON = recipeDelete.get({plain:true})
+        res.status(200).json(recipeDelete);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    };
+});
+
+// ============================================
+// DELETE A COMMENT
+// ============================================
+
+// router.delete('/comment/:id', async (req, res) => {
+//     try {
+//         // delete chosen comment
+//         const commentDelete = db.Comment.destroy({
+//             where: {
+//                 id: req.params.id,
+//             }
+//         });
+//         res.status(200).json(commentDelete);
+//     } catch (err) {
+//         console.log(err);
+//         res.status(500).json(err);
+//     }
+// })
 
 //Export//
 module.exports = router;
