@@ -34,6 +34,7 @@ Comment.belongsTo(User);
 
 Comment.belongsTo(Recipe);
 
+// RELATIONSHIP FOR USERS SAVING RECIPES
 Recipe.belongsToMany(User,{
     through: 'UserSaved',
     as: 'SavedUser'
@@ -42,6 +43,16 @@ User.belongsToMany(Recipe, {
     through: 'UserSaved',
     as: 'SavedRecipe'
 });
+
+// RELATIONSHIP FOR USERS LIKING RECIPES
+Recipe.belongsToMany(User, {
+    through: 'UserLiked',
+    as: 'LikedUser'
+});
+User.belongsToMany(Recipe, {
+    through: 'UserLiked',
+    as: 'LikedRecipe'
+})
 
 module.exports = {
     User,
