@@ -10,6 +10,10 @@ const checkSave = async () => {
     const res = await fetch('/savedRecipes');
     const resJSON = await res.json();
 
+    if (res.status === 403) {
+        return
+    };
+
     let savedIndex = 0;
     let saved = false;
     for (let i=0; i<resJSON.SavedRecipe.length; i++) {
@@ -27,11 +31,24 @@ const checkSave = async () => {
 };
 checkSave();
 
+// count total likes
+const likeCount = document.querySelector('#like-count');
+const countLike = async () => {
+    const likes = await fetch(`/likedRecipesCount/${current_recipe_id}`);
+    const likesJSON = await likes.json();
+    likeCount.innerHTML = likesJSON;
+};
+countLike();
+
 // check for liked status
 const likeBtn = document.querySelector('#like-button');
 const checkLike = async () => {
     const res = await fetch('/likedRecipes');
     const resJSON = await res.json();
+
+    if (res.status === 403) {
+        return
+    };
     
     let likedIndex = 0;
     let liked = false;
@@ -103,6 +120,11 @@ const saveHandler = async () => {
     const res = await fetch('/savedRecipes');
     const resJSON = await res.json();
 
+    if (res.status === 403) {
+        alert('Please log in to save a recipe.');
+        return
+    };
+
     let savedIndex = 0;
     let saved = false;
     for (let i=0; i<resJSON.SavedRecipe.length; i++) {
@@ -167,6 +189,11 @@ const likeHandler = async () => {
     const res = await fetch('/likedRecipes');
     const resJSON = await res.json();
 
+    if (res.status === 403) {
+        alert('Please log in to like a recipe.');
+        return
+    };
+
     let likedIndex = 0;
     let liked = false;
     for (let i=0; i<resJSON.LikedRecipe.length; i++) {
@@ -176,7 +203,7 @@ const likeHandler = async () => {
         };
     };
 
-    // IF RECIPE IS NOT LIKED - SAVE
+    // IF RECIPE IS NOT LIKED - LIKE
     if (!liked) {
         // server
         const addRes = await fetch('/likedRecipes', {
@@ -194,11 +221,12 @@ const likeHandler = async () => {
             likeBtn.classList.remove('btn-secondary');
             likeBtn.classList.add('btn-success');
             likeBtn.innerHTML = '<i class="far fa-thumbs-up"></i> Liked!';
+            likeCount.innerHTML = parseInt(likeCount.innerHTML) + 1;
         } else {
             alert('Error liking recipe...');
         };
 
-    // IF RECIPE IS SAVED - DELETE SAVE
+    // IF RECIPE IS LIKED - DELETE LIKE
     } else {
         // server
         const delRes = await fetch('/likedRecipes', {
@@ -216,6 +244,7 @@ const likeHandler = async () => {
             likeBtn.classList.remove('btn-secondary');
             likeBtn.classList.add('btn-success');
             likeBtn.innerHTML = '<i class="far fa-thumbs-up"></i> Liked!';
+            likeCount.innerHTML = parseInt(likeCount.innerHTML) - 1;
         } else {
             alert('Error un-liking recipe...');
         };
@@ -226,13 +255,6 @@ const likeHandler = async () => {
         likeBtn.innerHTML = '<i class="far fa-thumbs-up"></i> Like Recipe';
     };
 };
-
-// const commentDeleteHandler = async (event) => {
-//     const res = await fetch (`/comment/${}`, {
-//         method: 'DELETE',
-//     });
-//     location.replace(`/recipe/${current_recipe_id}/#comments`);
-// }
 
 
 // ==================================================================================
