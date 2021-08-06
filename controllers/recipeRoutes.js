@@ -162,6 +162,18 @@ router.delete('/likedRecipes', async (req, res) => {
     }
 });
 
+// count total likes
+router.get('/likedRecipesCount/:id', async (req, res) => {
+    try {
+        const recipe = await db.Recipe.findByPk(req.params.id);
+        const likeCount = await recipe.countLikedUser();
+        res.status(200).json(likeCount)
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    };
+});
+
 // delete a recipe
 router.delete('/recipe/:id', async (req, res) => {
     try {
