@@ -32,6 +32,7 @@ router.get("/", auth, (req, res) => {
         model: db.Genre,
         attributes: ["id", "name"],
       },
+    
     ],
   })
     .then((recipesData) => {

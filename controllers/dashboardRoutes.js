@@ -2,6 +2,8 @@ const router = require("express").Router();
 const sequelize = require("../config/connection");
 const db = require("../models");
 
+
+// User dashboard if logged in
 router.get("/dashboard", (req, res) => {
     console.log(req.session)
     db.Recipe.findAll({
