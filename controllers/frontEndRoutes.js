@@ -31,12 +31,6 @@ router.get("/", (req, res) => {
       {
         model: db.Genre,
         attributes: ["id", "name"],
-      },
-      {
-        model: db.Recipe,
-        as: `SavedRecipe`,
-        attributes: {exclude: [`createdAt`, `updatedAt`]},
-        through:{attributes: {exclude: [`createdAt`,`updatedAt`]}}
       }
     ],
   })
@@ -86,12 +80,6 @@ router.get("/recipe/:id", (req, res) => {
       {
         model: db.Genre,
         attributes: ["id", "name"],
-      },
-      {
-        model: db.Recipe,
-        as: `SavedRecipe`,
-        attributes: {exclude: [`createdAt`, `updatedAt`]},
-        through:{attributes: {exclude: [`createdAt`,`updatedAt`]}}
       }
     ],
   })
