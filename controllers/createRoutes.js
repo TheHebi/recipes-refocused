@@ -88,7 +88,7 @@ router.post('/createIngredients', async (req, res) => {
 router.post('/addTags', async (req, res) => {
     try {
         const recipe = await db.Recipe.findByPk(req.body.RecipeId);
-        recipe.addGenre(req.body.recipe_genres);
+        await recipe.addGenre(req.body.recipe_genres);
         res.status(200).json(recipe.get({plain:true}))
     } catch (err) {
         console.log(err);
