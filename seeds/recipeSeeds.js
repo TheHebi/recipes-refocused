@@ -2,7 +2,8 @@ const Recipe = require("../models/Recipe");
 
 const recipeData = [
   {
-    recipe_image: "https://images.unsplash.com/photo-1588484588657-0bbbee05132f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80",
+
+    recipe_image: "https://res.cloudinary.com/dwz0bmbpa/image/upload/v1628137516/Recipe%20Blog%20Assets/omar-al-ghosson-AhZJjvvDIGY-unsplash_i0jzpj.jpg",
     recipe_name: "French Toast",
     prep_time: 20,
     cook_time: 10,

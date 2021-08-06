@@ -104,4 +104,9 @@ dist
 .tern-port
 
 .vscode
+<<<<<<< HEAD
 package-lock.json
+=======
+package-lock.json
+.DS_Store
+>>>>>>> develop
