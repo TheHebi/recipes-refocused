@@ -2,29 +2,29 @@
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-6 col-sm-12 d-flex flex-column">
             <div class="col-12">
-                <h2 class="text-center">Create an Account:</h2>
-            </div>
-            <hr class="my-3">
-            <div class="col-12">
-                <div class="card bg-light">
-                    <form class="d-flex flex-column m-3" id="signupForm">
+                <div class="card bg-light" id="signupCard">
+                    <h2 class="mt-4 text-center">Create an Account</h2>
+                    <p class="text-center">Get started with your free account</p>
+                    <hr class="mx-auto" width="90%">
+                    <form class="d-flex flex-column mx-3" id="signupForm">
                         <div class="form-group p-2">
-                            <label for="signupEmail"><strong><i class="fas fa-at"></i> Email</strong></label>
+                            <label for="signupEmail"><i class="fas fa-at"></i> Email</label>
                             <input id="signupEmail" placeholder="Email" type="email" class="form-control" />
                         </div>
                         <div class="form-group p-2">
-                            <label for="signupUsername"><strong><i class="fas fa-user"></i> Username</strong></label>
+                            <label for="signupUsername"><i class="fas fa-user"></i> Username</label>
                             <input id="signupUsername" placeholder="Username" type="text" class="form-control" />
                         </div>
                         <div class="form-group p-2">
-                            <label for="signupPassword"><strong><i class="fas fa-key"></i> Password</strong></label>
+                            <label for="signupPassword"><i class="fas fa-key"></i> Password</label>
                             <input id="signupPassword" placeholder="Password" type="password" class="form-control" />
                         </div>
                         <div class="form-group p-2 text-center">
                             <button type="submit" class="btn btn-danger w-100">
-                                    <i class="fas fa-user-plus"></i> Sign Up</button>
+                                <i class="fas fa-user-plus"></i> Sign Up</button>
                         </div>
                     </form>
+                    <p class="text-center my-2">Have an account? <a href="/login" style="text-decoration: none;">Log in</a></p>
                 </div>
             </div>
         </div>
