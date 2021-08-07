@@ -153,9 +153,6 @@ input[type="number"]::-webkit-outer-spin-button {
   #recipe-image {
     max-height: 25vh;
   }
-  .custom-tab-footer {
-    border-radius: 0 0 0 0;
-  }
 }
 
 @media screen and (max-width: 576px) {
@@ -169,5 +166,13 @@ input[type="number"]::-webkit-outer-spin-button {
     margin: 0 !important;
     border: none;
     border-radius: 0;
+  }
+
+  .custom-tab-footer {
+    border-radius: 0px;
+
+    flex-direction: column;
+    padding-bottom: 1em;
+    padding-top: 1em;
   }
 }

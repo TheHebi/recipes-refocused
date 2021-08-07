@@ -66,11 +66,13 @@
             </div>
             <div class="col-12 m-0 d-flex custom-tab-footer">
                 <div class="d-flex flex-row align-items-center">
-                    <div class="mt-3 mx-3">
-                        <p id="like-count"></p>
-                    </div>
-                    <div>
-                        <button class="btn btn-secondary" id="like-button"><i class="far fa-thumbs-up"></i></i>  Like Recipe</button>
+                    <div class="d-flex flex-row align-items-center">
+                        <div class="d-flex flex-row align-items-center">
+                            <div class="mt-3 mx-3">
+                                <p id="like-count"></p>
+                            </div>
+                            <button class="btn btn-secondary" id="like-button"><i class="far fa-thumbs-up"></i>  Like Recipe</button>
+                        </div>
                         <button class="btn btn-secondary mx-2" id="save-button"><i class="fas fa-save"></i>  Save Recipe</button>
                     </div>
                 </div>
@@ -95,8 +97,16 @@
                     </button>
                 </div>
             </form>
-            <hr class="my-3">
             {{/if}}
+            {{#unless loggedIn}}
+            <h4 class="text-center">Want to leave a comment?</h4>
+            <div class="form-group p-2 text-center">
+                <a href="/login">
+                    <button type="submit" class="btn btn-danger w-50"><i class="fas fa-sign-in-alt"></i> Login</button>
+                </a>
+            </div>
+            {{/unless}}
+            <hr class="my-3">
             <div id="comment-list">
                 {{#each post.Comments as |comment|}}
                 <div class="card my-2">
