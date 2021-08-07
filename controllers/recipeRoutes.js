@@ -13,6 +13,10 @@ router.get("/recipe/:id", (req, res) => {
             id: req.params.id,
         },
         attributes: ["id", "recipe_name", "recipe_image", "prep_time","cook_time", "createdAt"],
+        order: [
+            [db.Instruction, 'id', 'asc'],
+            [db.Ingredient, 'id', 'asc']
+        ],
         include: [
             {
                 model: db.Comment,
