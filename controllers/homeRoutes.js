@@ -6,7 +6,7 @@ const db = require("../models");
 router.get("/", (req, res) => {
     console.log(req.session)
     db.Recipe.findAll({
-        attributes: ["id", "recipe_name", "recipe_image", "prep_time", "cook_time"],
+        attributes: ["id", "recipe_name", "recipe_image", "prep_time", "cook_time", "createdAt"],
         include: [
             {
                 model: db.Comment,
