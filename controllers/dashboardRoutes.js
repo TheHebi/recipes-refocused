@@ -10,11 +10,11 @@ router.get('/dashboard', async (req, res) => {
                     {
                         model: db.Recipe,
                         as: `SavedRecipe`,
-                        attributes: { exclude: [`createdAt`, `updatedAt`] },
+                        attributes: { exclude: [`updatedAt`] },
                         include: {
                             model: db.Genre
                         },
-                        through: { attributes: { exclude: [`createdAt`, `updatedAt`] } }
+                        through: { attributes: { exclude: [`updatedAt`] } }
                     },
                 ],
             });
@@ -23,7 +23,7 @@ router.get('/dashboard', async (req, res) => {
                 where: {
                     UserId: req.session.user_id
                 },
-                attributes: ["id", "recipe_name", "recipe_image", "prep_time", "cook_time"],
+                attributes: ["id", "recipe_name", "recipe_image", "prep_time", "cook_time", 'createdAt'],
                 include: [
                     {
                         model: db.Comment,
