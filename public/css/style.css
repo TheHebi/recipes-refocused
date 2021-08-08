@@ -7,6 +7,8 @@
   box-sizing: border-box;
 }
 
+/* NAVBAR AND OTHER SITE-WIDE ATTRIBUTES */
+
 #website-logo {
   font-family: "Yusei Magic", sans-serif;
   font-size: 40px;
@@ -35,6 +37,35 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+
+/* RECIPE LIST */
+
+.custom-list-image {
+  height: 5em;
+  width: 10em;
+  object-fit: cover;
+}
+
+.recipe-item {
+  padding: 0;
+  border: 1px solid #333333;
+  border-radius: 0.25rem;
+}
+
+.recipe-item-details {
+  padding: 1em;
+}
+
+.custom-tab-footer-recipes {
+  border: 1px solid #cccccc;
+  border-top: 1px solid #333333;
+  background: #cccccc;
+  border-radius: 0 0 0.25rem 0.25rem;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
 }
 
 /* About Us */
