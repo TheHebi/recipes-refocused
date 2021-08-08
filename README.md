@@ -10,7 +10,7 @@
 </p>
 
 <h2 align="center">
-  <a href="">Deployed Site</a>
+  <a href="https://recipes-refocused.herokuapp.com/">Deployed Site</a>
 </h2>
 
 ## Description:
@@ -26,7 +26,7 @@ Ready to trim the fat? Recipes Refocused is the newer, faster way explore recipe
 
 ## Instructions
 
-1. Follow <a href="">this link</a> to navigate to Recipes Refocused.
+1. Follow <a href="https://recipes-refocused.herokuapp.com/">this link</a> to navigate to Recipes Refocused.
 2. On the landing page you can view recipes, sign-up for an account, or log into your account if you already have one.
 3. When you click on a recipe you will be redirected to the recipes page where you will see all of the reipes information.
 4. If you are logged into your account, you can leave a comment on a recipe, save the recipe to your account, or "like" the recipe.
