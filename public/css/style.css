@@ -7,6 +7,71 @@
   box-sizing: border-box;
 }
 
+.highlight:hover .highlight-target {
+  color: #212529;
+}
+
+/* BUTTON COLORING */
+.btn {
+  border-radius: 100px;
+}
+
+.btn-danger {
+  /* red */
+  background-color: #ad0000 !important;
+  border-color: #ad0000 !important;
+}
+
+.btn-danger:hover {
+  opacity: 0.8;
+}
+
+.btn-warning {
+  /* yellow */
+  background-color: #e07810 !important;
+  border-color: #e07810 !important;
+  color: white;
+}
+
+.btn-warning:hover {
+  color: white;
+  /* background-color: rgba(224, 120, 16, 1.5); */
+  opacity: 0.8;
+}
+
+.btn-primary {
+  /* blue */
+  background-color: #3d63fc !important;
+  border-color: #3d63fc !important;
+}
+
+.btn-primary:hover {
+  opacity: 0.8;
+}
+
+.btn-success {
+  /* green */
+  background-color: #0f7316 !important;
+  border-color: #0f7316 !important;
+}
+
+.btn-success:hover {
+  opacity: 0.8;
+}
+
+.bg-primary {
+  background-color: salmon !important;
+}
+
+.bg-warning {
+  background-color: #e07810 !important;
+  color: white;
+}
+
+.rounded-header {
+  border-radius: 100px;
+}
+
 /* NAVBAR AND OTHER SITE-WIDE ATTRIBUTES */
 
 #website-logo {

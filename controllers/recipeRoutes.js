@@ -49,12 +49,16 @@ router.get("/recipe/:id", (req, res) => {
     };
   
     const post = recipeData.get({plain: true});
+    //add session id to post for comment iteration
+    post.Comments.forEach(comment => {
+        comment.session_id = req.session.user_id
+    });
   
     // res.status(200).json(post);
     const recipeOwner = (post.User.id === req.session.user_id);
     res.render("recipe", {
         post,
-        // session_user_is: req.session.user_id,
+        // session_user_id: req.session.user_id,
         loggedIn: req.session.loggedIn,
         username: req.session.username,
         recipe_owner: recipeOwner
