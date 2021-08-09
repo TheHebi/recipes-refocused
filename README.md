@@ -10,7 +10,7 @@
 </p>
 
 <h2 align="center">
-  <a href="">Deployed Site</a>
+  <a href="https://recipes-refocused.herokuapp.com/">Deployed Site</a>
 </h2>
 
 ## Description:
@@ -26,8 +26,14 @@ Ready to trim the fat? Recipes Refocused is the newer, faster way explore recipe
 
 ## Instructions
 
-1. Follow <a href="">this link</a> to navigate to Recipes Refocused.
+1. Follow <a href="https://recipes-refocused.herokuapp.com/">this link</a> to navigate to Recipes Refocused.
+
+![landing page](./images/landing-page.png)
+
 2. On the landing page you can view recipes, sign-up for an account, or log into your account if you already have one.
+
+![login](./images/login.png)
+
 3. When you click on a recipe you will be redirected to the recipes page where you will see all of the reipes information.
 4. If you are logged into your account, you can leave a comment on a recipe, save the recipe to your account, or "like" the recipe.
 5. Logged In users will have four buttons in the nav bar: Home, Create Recipe, Dashboard, and Logout
@@ -40,12 +46,22 @@ Ready to trim the fat? Recipes Refocused is the newer, faster way explore recipe
     * Ingredients
     * Steps 
 7. Clicking the Post Recipe button will save the recipe to the server, you can also click the Cancel button to stop saving the recipe at any time.
-8. Clicking on the Home button will navigate you to the homepage.
-9. Clicking on the Dashboard button will navigate you to your own dashboard page where you can:
+8. After posting a recipe, you can choose to edit it if you made any mistakes.
+9. Clicking on the Home button will navigate you to the homepage.
+10. Clicking on the Dashboard button will navigate you to your own dashboard page where you can:
     * View recipes you have posted
     * View recipes you have clicked the Save button on
     * Create a new recipe
-10. When you are done using the site, don't forget to log out.
+
+![dashboard](./images/dashboard.png)
+
+11. You can leave a comment on any recipe you are viewing
+12. If you are logged in you can leave a like on a recipe, as well as save it to your profile for later viewing
+
+![like and save](./images/likes-and-saves.png)
+
+
+13. When you are done using the site, don't forget to log out.
 
 ## Contributors
 
