@@ -7,6 +7,10 @@
   box-sizing: border-box;
 }
 
+.highlight:hover .highlight-target {
+  color: #212529;
+}
+
 /* BUTTON COLORING */
 .btn {
   border-radius: 100px;
