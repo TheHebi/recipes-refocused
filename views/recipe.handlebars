@@ -4,8 +4,8 @@
         <div class="col-12 d-flex flex-column m-5 mb-0 custom-tab no-padding">
             <div class="m-5 d-flex justify-content-between align-items-center">
                 <div id="recipe-title">
-                    <h1>{{post.recipe_name}}</h1>
-                    <div class="d-flex flex-row mb-1 mt-1 flex-wrap">
+                    <h1 id="title">{{post.recipe_name}}</h1>
+                    <div class="d-flex flex-row mb-1 mt-1 flex-wrap" id="genre-list">
                         {{#each post.Genres as |genre|}}
                         <span class="badge rounded-pill bg-primary mx-1 my-1">{{genre.name}}</span>
                         {{/each}}
@@ -33,16 +33,26 @@
                         <div class="card">
                             <div class="row d-flex justify-content-around">
                                 <div class="my-3 d-flex flex-column justify-content-center align-items-center">
-                                    <p><strong>Prep:</strong> {{post.prep_time}}</p>
-                                    <p><strong>Cook:</strong> {{post.cook_time}}</p>
+                                    <div class="d-flex">
+                                        <strong>Prep:</strong>
+                                        <p id="prep-time" class="ms-2">{{post.prep_time}}</p>
+                                    </div>
+                                    <div class="d-flex">
+                                        <strong>Cook:</strong>
+                                        <p id="cook-time" class="ms-2">{{post.cook_time}}</p>
+                                    </div>
                                 </div>
                             </div>
                             <h2 class="m-2" style="text-decoration: underline;">Ingredients</h2>
-                            <ul class="mx-2 custom-ingredient-list" style="list-style-type: none;">
+                            <ul class="mx-2 custom-ingredient-list" style="list-style-type: none;" id="ingredient-list">
                                 {{#each post.Ingredients as |ingredient|}}
                                 <li class="d-flex flex-row">
                                     <input class="form-check-input custom-checkbox" type="checkbox">
-                                    <p class="mx-3">{{ingredient.amount}} {{ingredient.unit}} {{ingredient.name}}</p>
+                                    <div class="mx-3 d-flex justify-content-start">
+                                        <p>{{ingredient.amount}}</p>
+                                        <p class="ms-1">{{ingredient.unit}}</p>
+                                        <p class="ms-1">{{ingredient.name}}</p>
+                                    </div>
                                 </li>
                                 {{/each}}
                             </ul>
@@ -78,6 +88,7 @@
                 </div>
                 <div>
                     {{#if recipe_owner}}
+                    <button class="btn btn-warning mx-2" id="recipe-update-btn"><i class="fas fa-edit"></i>  Update Recipe</button>
                     <button class="btn btn-danger" id="recipe-delete-btn"><i class="fas fa-trash-alt"></i>  Delete Recipe</button>
                     {{/if}}
                 </div>
@@ -109,12 +120,18 @@
             <hr class="my-3">
             <div id="comment-list">
                 {{#each post.Comments as |comment|}}
-                <div class="card my-2">
+                <div class="card my-2" data-id="{{comment.id}}">
                     <div class="card-body">
                         <span>{{comment.content}}</span>
                     </div>
-                    <div class="card-footer my-0 d-flex">
-                        <small><p class="my-1"><strong>{{comment.User.username}}</strong> on {{format_date comment.createdAt}}</p></small>
+                    <div class="card-footer my-0 d-flex justify-content-between align-items-center">
+                        <div>
+                            <small><p class="my-1"><strong>{{comment.User.username}}</strong> on {{format_date comment.createdAt}}</p></small>
+                        </div>
+                        {{!-- <div>
+                            <button class="btn btn-warning mx-2 comment-update" id="recipe-update-btn">Edit</button>
+                            <button class="btn btn-danger comment-delete" id="recipe-delete-btn">Delete</button>
+                        </div> --}}
                     </div>
                 </div>
                 {{/each}}
