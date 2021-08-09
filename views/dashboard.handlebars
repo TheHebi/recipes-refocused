@@ -1,29 +1,30 @@
 <main class="container my-4 custom-wrapper-all">
     <div class="row justify-content-center">
-        <div class="col-12 d-flex flex-wrap justify-content-center px-2">
-            <div class="col-5 mx-2">
+        <div class="col-12 d-flex flex-wrap justify-content-center px-2 mt-3">
+
+            <div class="col-12 col-xxl-5 mx-2">
                 <div class="col-12">
-                    <div class="card bg-success">
+                    <div class="card rounded-header" style="background-color: #0f7316; color:white;">
                         <h3 class="text-center p-2">My Recipe List</h3>
                     </div>
                 </div>
 
-                <div class="list-group mb-5">
+                <div class="list-group p-3 mb-5">
                     {{#each myRecipeJSON}}
                     {{> dashboard-my-list}}
                     {{/each}}
                 </div>
             </div>
 
-            <div class="col-5 mx-2">
+            <div class="col-12 col-xxl-5 mx-2">
                 <div class="col-12">
-                    <div class="card bg-primary">
+                    <div class="card rounded-header" style="background-color: #3d63fc; color:white;">
                         <h3 class="text-center p-2">Saved Recipe List</h3>
                     </div>
                 </div>
 
-                <div class="list-group mb-5">
-                    {{#each savedRecipeJSON.SavedRecipe}}
+                <div class="list-group p-3 mb-5">
+                    {{#each savedRecipeJSON}}
                     {{> dashboard-my-list}}
                     {{/each}}
                 </div>

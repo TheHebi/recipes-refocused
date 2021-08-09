@@ -5,53 +5,100 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe Blog</title>
+    <title>Recipes Refocused</title>
 
     <!-- STYLE -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/4abdc4b91e.js" crossorigin="anonymous"></script>
+    {{!-- Google Font --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,300&family=Lato:ital@1&family=Yusei+Magic&display=swap"
+        rel="stylesheet">
     <!-- CUSTOM -->
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body class="background">
     <header class="p-3 bg-dark text-white">
-        <div class="container">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
-                        <use xlink:href="#bootstrap"></use>
-                    </svg>
-                </a>
-
+        <div class="d-flex flex-column flex-wrap">
+                <div class="mx-auto">
+                    <a href="/" class="nav-brand d-flex flex-column" style="text-decoration: none;">
+                        <div class="text-center text-warning p-0" id="website-logo">REC🍴PES</div>
+                        <div class="text-center text-warning p-0" id="website-logo">REF🔎CUSED</div>
+                    </a>
+                </div>
 
                 {{#if loggedIn}}
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="/" class="nav-link px-2 text-warning">Home</a></li>
-                    <li><a href="/create" class="nav-link px-2 text-white">Create Recipe</a></li>
-                    <li><a href="/dashboard" class="nav-link px-2 text-white">Dashboard</a></li>
-                </ul>
 
-                <div class="text-end">
-                    <button id="logoutBtn" class="btn btn-primary">Logout</button>
-                </div>
+                <nav class="navbar navbar-expand-md">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span style="font-size: xx-large;"><i class="fas fa-bars"></i></span>
+                    </button>
+                    <div class="collapse navbar-collapse custom-navbar-items" id="navbarNav">
+                        <ul class="navbar-nav d-flex justify-content-between w-100">
+                            <div class="custom-nav-group">
+                                <li class="nav-item">
+                                    <a href="/" class="nav-link px-2 text-warning" style="font-size: large;">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/about" class="nav-link px-2 text-white" style="font-size: large;">About us</a>
+                                </li>
+                            </div>
+                            <div class="custom-nav-group">
+                                <li class="nav-item">
+                                    <a href="/create" class="nav-link px-2 text-white" style="font-size: large;">Create Recipe</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/dashboard" class="nav-link px-2 text-white" style="font-size: large;">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/" id="logoutBtn" class="nav-link px-2 text-danger" style="font-size: large;">Logout</a>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+                </nav>
+
                 {{else}}
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="/" class="nav-link px-2 text-warning">Home</a></li>
-                </ul>
 
-                <div class="text-end">
-                    <a href="/login"><button type="button" class="btn btn-primary me-2">Login</button></a>
-                    <a href="/signup"><button type="button" class="btn btn-primary">Sign-up</button></a>
-                </div>
+                <nav class="navbar navbar-expand-md">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span style="font-size: xx-large;"><i class="fas fa-bars"></i></span>
+                    </button>
+                    <div class="collapse navbar-collapse custom-navbar-items" id="navbarNav">
+                        <ul class="navbar-nav d-flex justify-content-between w-100">
+                            <div class="custom-nav-group">
+                                <li class="nav-item">
+                                    <a href="/" class="nav-link px-2 text-warning" style="font-size: large;">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/about" class="nav-link px-2 text-white" style="font-size: large;">About us</a>
+                                </li>
+                            </div>
+                            <div class="custom-nav-group">
+                                <li class="nav-item">
+                                    <a href="/login" class="nav-link px-2 text-white" style="font-size: large;">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/signup" class="nav-link px-2 text-white" style="font-size: large;">Sign-up</a>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+                </nav>
+
                 {{/if}}
+
             </div>
-        </div>
     </header>
 
-    {{{ body }}}
+    <div class="container">
+        {{{ body }}}
+    </div>
 
     <!-- SCRIPT -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

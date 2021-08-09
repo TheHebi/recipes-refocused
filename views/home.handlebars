@@ -1,13 +1,13 @@
-<main class="container mt-4 custom-wrapper-all">
+<main class="container custom-wrapper-all">
     <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-6 col-sm-12 d-flex flex-column">
+        <div class="col-lg-8 col-md-10 col-sm-12 mt-5 d-flex flex-column">
             <div class="col-12">
-                <div class="card bg-warning">
+                <div class="card bg-warning rounded-header">
                     <h3 class="text-center p-2">Recipe List</h3>
                 </div>
             </div>
 
-            <div class="list-group mb-5">
+            <div class="list-group p-3 mb-5">
                 {{#each posts as |post|}}
                 {{> post-info}}
                 {{/each}}

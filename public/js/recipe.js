@@ -116,6 +116,10 @@ const recipeDeleteHandler = async () => {
     };
 };
 
+const recipeUpdateHandler = async () => {
+    location.replace(`/update/${current_recipe_id}`);
+};
+
 const saveHandler = async () => {
     const res = await fetch('/savedRecipes');
     const resJSON = await res.json();
@@ -256,10 +260,89 @@ const likeHandler = async () => {
     };
 };
 
+const commentDeleteHandler = async (event) => {
+    comment_id = 0;
+    // delete comment from databse
+    await fetch(`/comment/${comment_id}`, {
+        method: 'DELETE'
+    });
+};
+
+const commentUpdateSubmitHandler = async (event) => {
+    // submit form
+    const card_body = event.target.parentElement.parentElement.children[0];
+    const comment_id = card_body.parentElement.getAttribute('data-id');
+    const card_content = card_body.children[0].value;
+    console.log(card_body)
+    console.log(comment_id)
+    console.log(card_content)
+
+    const res = await fetch(`/comment/${comment_id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            content: card_content,
+        }),
+        headers: {
+            "Content-Type":"application/json"
+        },
+    });
+    console.log(res.status)
+    if (res.status === 200) {
+        // reload
+        location.reload();
+    } else if (res.status === 500) {
+        alert('Error updating comment');
+    }
+};
+
+const commentUpdateDeleteHandler = async (event) => {
+    event.preventDefault();
+    if (event.target.matches('.comment-update')) {
+        // convert to editor
+        const card_body = event.target.parentElement.parentElement.parentElement.children[0];
+        const content = card_body.children[0].innerHTML;
+
+        card_body.children[0].remove();
+        newTextArea = document.createElement('textarea');
+        newTextArea.classList.add('form-control');
+        newTextArea.setAttribute('rows', 5);
+        newTextArea.innerHTML = content;
+        card_body.append(newTextArea)
+        
+        newCommentUpdateBtn = document.createElement('button');
+        newCommentUpdateBtn.innerHTML = 'Submit';
+        newCommentUpdateBtn.classList.add('btn', 'btn-warning');
+        newCommentUpdateBtn.style.position = 'absolute';
+        newCommentUpdateBtn.style.bottom = '5em';
+        newCommentUpdateBtn.style.right = '1.5em';
+        card_body.append(newCommentUpdateBtn);
+
+        newCommentUpdateBtn.addEventListener('click', commentUpdateSubmitHandler);
+    } else if (event.target.matches('.comment-delete')) {
+        if (confirm('Are you sure you want to delete this comment?')) {
+            const card_body = event.target.parentElement.parentElement.parentElement.children[0];
+            const comment_id = card_body.parentElement.getAttribute('data-id');
+            // delete
+            await fetch(`/comment/${comment_id}`, {
+                method: 'DELETE'
+            });
+            // reload
+            location.reload();
+        } else {
+            return;
+        };
+    };
+};
+
 
 // ==================================================================================
 // EVENT LISTENERS
 // ==================================================================================
+
+// Update a recipe button
+if (document.querySelector('#recipe-update-btn')) {
+    document.querySelector('#recipe-update-btn').addEventListener('click', recipeUpdateHandler);
+};
 
 // Delete a recipe button
 if (document.querySelector('#recipe-delete-btn')) {
@@ -282,5 +365,5 @@ saveBtn.addEventListener('click', saveHandler);
 // Like recipe button functionality
 likeBtn.addEventListener('click', likeHandler);
 
-// document.querySelector('#like-btn').addEventListener('click', upvoteHandler);
-// unsaveBtn.addEventListener('click', saveHandler);
+// Edit and Delete Comment button functionality
+document.querySelector('#comment-list').addEventListener('click', commentUpdateDeleteHandler);
