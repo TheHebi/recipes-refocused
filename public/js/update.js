@@ -113,9 +113,11 @@ const ingredientCreateHandler = () => {
     // format neighbor div
     // update image height (to the left)
     const recipeImage = document.querySelector('#output');
-    const clientHeight = document.getElementById('card-right').children[0].clientHeight;
-    recipeImage.style.height = `${clientHeight}px`;
-    recipeImage.style.objectFit = 'cover';
+    if (recipeImage.src != '') {
+        const clientHeight = document.getElementById('card-right').children[0].clientHeight;
+        recipeImage.style.height = `${clientHeight}px`;
+        recipeImage.style.objectFit = 'cover';
+    };
 };
 
 const ingredientDeleteHandler  = (event) => {

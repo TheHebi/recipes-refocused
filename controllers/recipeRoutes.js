@@ -225,7 +225,10 @@ router.get('/update/:id', async (req, res) => {
         });
         const recipeJSON = recipe.get({plain: true})
         console.log(recipeJSON);
-        res.render('update', recipeJSON);
+        res.render('update', {
+            ...recipeJSON,
+            loggedIn: req.session.loggedIn
+        });
     } catch (err) {
         res.status(500).json(err);
     };
