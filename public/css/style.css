@@ -362,6 +362,11 @@ input[type="number"]::-webkit-outer-spin-button {
     padding-top: 1em;
   }
 
+  .home-about-mobile {
+    flex-direction: column !important;
+    align-items: center;
+  }
+
   #loginCard {
     margin-top: 20px;
   }
