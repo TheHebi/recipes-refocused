@@ -128,10 +128,12 @@
                         <div>
                             <small><p class="my-1"><strong>{{comment.User.username}}</strong> on {{format_date comment.createdAt}}</p></small>
                         </div>
-                        {{!-- <div>
-                            <button class="btn btn-warning mx-2 comment-update" id="recipe-update-btn">Edit</button>
-                            <button class="btn btn-danger comment-delete" id="recipe-delete-btn">Delete</button>
-                        </div> --}}
+                        {{#if (isEqualTo comment.User.id comment.session_id)}}
+                        <div>
+                            <button class="btn btn-warning mx-2 comment-update">Edit</button>
+                            <button class="btn btn-danger comment-delete">Delete</button>
+                        </div>
+                        {{/if}}
                     </div>
                 </div>
                 {{/each}}

@@ -268,42 +268,56 @@ const commentDeleteHandler = async (event) => {
     });
 };
 
-let editorMode = false;
+const commentUpdateSubmitHandler = async (event) => {
+    // submit form
+    const card_body = event.target.parentElement.parentElement.children[0];
+    const comment_id = card_body.parentElement.getAttribute('data-id');
+    const card_content = card_body.children[0].value;
+    console.log(card_body)
+    console.log(comment_id)
+    console.log(card_content)
+
+    const res = await fetch(`/comment/${comment_id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            content: card_content,
+        }),
+        headers: {
+            "Content-Type":"application/json"
+        },
+    });
+    console.log(res.status)
+    if (res.status === 200) {
+        // reload
+        location.reload();
+    } else if (res.status === 500) {
+        alert('Error updating comment');
+    }
+};
+
 const commentUpdateDeleteHandler = async (event) => {
     event.preventDefault();
     if (event.target.matches('.comment-update')) {
-        if (editorMode) {
-            // submit form
-            const card_body = event.target.parentElement.parentElement.parentElement.children[0];
-            const comment_id = card_body.parentElement.getAttribute('data-id');
-            const card_content = card_body.children[0].innerHTML;
+        // convert to editor
+        const card_body = event.target.parentElement.parentElement.parentElement.children[0];
+        const content = card_body.children[0].innerHTML;
 
-            await fetch(`/comment/${comment_id}`, {
-                method: 'PUT',
-                body: JSON.stringify({
-                    content: card_content,
-                }),
-                headers: {
-                    "Content-Type":"application/json"
-                },
-            });
+        card_body.children[0].remove();
+        newTextArea = document.createElement('textarea');
+        newTextArea.classList.add('form-control');
+        newTextArea.setAttribute('rows', 5);
+        newTextArea.innerHTML = content;
+        card_body.append(newTextArea)
+        
+        newCommentUpdateBtn = document.createElement('button');
+        newCommentUpdateBtn.innerHTML = 'Submit';
+        newCommentUpdateBtn.classList.add('btn', 'btn-warning');
+        newCommentUpdateBtn.style.position = 'absolute';
+        newCommentUpdateBtn.style.bottom = '5em';
+        newCommentUpdateBtn.style.right = '1.5em';
+        card_body.append(newCommentUpdateBtn);
 
-            // reload
-            location.replace(`/recipe/${current_recipe_id}/#comments`);
-        } else {
-            // convert to editor
-            const card_body = event.target.parentElement.parentElement.parentElement.children[0];
-            const content = card_body.children[0].innerHTML;
-    
-            card_body.children[0].remove();
-            newTextArea = document.createElement('textarea');
-            newTextArea.classList.add('form-control');
-            newTextArea.setAttribute('rows', 5);
-            newTextArea.innerHTML = content;
-            card_body.append(newTextArea)
-
-            editorMode = true;
-        };
+        newCommentUpdateBtn.addEventListener('click', commentUpdateSubmitHandler);
     } else if (event.target.matches('.comment-delete')) {
         if (confirm('Are you sure you want to delete this comment?')) {
             const card_body = event.target.parentElement.parentElement.parentElement.children[0];
@@ -313,7 +327,7 @@ const commentUpdateDeleteHandler = async (event) => {
                 method: 'DELETE'
             });
             // reload
-            location.replace(`/recipe/${current_recipe_id}/#comments`);
+            location.reload();
         } else {
             return;
         };
