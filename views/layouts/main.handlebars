@@ -15,7 +15,9 @@
     {{!-- Google Font --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,300&family=Lato:ital@1&family=Yusei+Magic&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,300&family=Lato:ital@1&family=Yusei+Magic&display=swap"
+        rel="stylesheet">
     <!-- CUSTOM -->
     <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -32,8 +34,8 @@
                     </a>
                 </div>
 
-                <div class="d-flex flex-row justify-content-between">
-                    <ul class="nav text-start">
+                <div class="d-flex flex-row justify-content-between home-about-mobile">
+                    <ul class="nav text-start d-flex flex-row home-about-mobile">
                         <li class="nav-item">
                             <a href="/" class="nav-link px-2 text-warning" style="font-size: large;">Home</a>
                         </li>
@@ -42,7 +44,7 @@
                         </li>
                     </ul>
 
-                    <ul class="nav text-end">
+                    <ul class="nav text-end d-flex flex-row home-about-mobile">
                         <li class="nav-item">
                             <a href="/create" class="nav-link px-2 text-white" style="font-size: large;">Create
                                 Recipe</a>
@@ -68,24 +70,28 @@
                     </a>
                 </div>
 
-                <div class="d-flex flex-row justify-content-between">
-                    <ul class="nav text-start">
-                        <li class="nav-item">
-                            <a href="/" class="nav-link px-2 text-warning" style="font-size: large;">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/about" class="nav-link px-2 text-white" style="font-size: large;">About us</a>
-                        </li>
-                    </ul>
+                <div class="d-flex flex-row justify-content-between home-about-mobile">
+                    <div>
+                        <ul class="nav text-start d-flex flex-row home-about-mobile">
+                            <li class="nav-item">
+                                <a href="/" class="nav-link px-2 text-warning" style="font-size: large;">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/about" class="nav-link px-2 text-white" style="font-size: large;">About us</a>
+                            </li>
+                        </ul>
+                    </div>
 
-                    <ul class="nav text-end">
-                        <li class="nav-item">
-                            <a href="/login" class="nav-link px-2 text-white" style="font-size: large;">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/signup" class="nav-link px-2 text-white" style="font-size: large;">Sign-up</a>
-                        </li>
-                    </ul>
+                    <div>
+                        <ul class="nav text-end d-flex flex-row home-about-mobile">
+                            <li class="nav-item">
+                                <a href="/login" class="nav-link px-2 text-white" style="font-size: large;">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/signup" class="nav-link px-2 text-white" style="font-size: large;">Sign-up</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 {{/if}}
             </div>
