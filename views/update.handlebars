@@ -1,0 +1,136 @@
+<p id="recipe-id" style="display: none;">{{id}}</p>
+<main class="custom-wrapper-all">
+    <div class="row justify-content-center">
+        <div class="col-12 d-flex flex-column m-5 p-5 custom-tab-create">
+            {{!-- <form id="create-recipe-form"> --}}
+                <div class="d-flex justify-content-between">
+                    <textarea class="form-control form-control-lg" type="text" aria-label="title input box" style="width: 50%; resize: none;" required rows="1" id="recipe-title">{{recipe_name}}</textarea>
+                    <button type="button" class="btn btn-lg btn-danger mx-3" id="cancel-btn"><i class="fas fa-chevron-left"></i> Cancel</button>
+                </div>
+                <div class="mt-3 d-flex flex-row flex-wrap" id="genre-list">
+                    {{#each Genres as |genre|}}
+                    <div class="card mx-2 mt-1">
+                        <div class="card-header d-flex justify-content-end">
+                            <button class="btn-close"></button>
+                        </div>
+                        <div class="card-body">
+                            <span class="badge rounded-pill bg-primary" data-id="{{genre.id}}">{{genre.name}}</span>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                <div class="mt-3">
+                    <div class="input-group">
+                        <select class="form-select" id="genre" aria-label="Genre select dropdown">
+                            <option selected>Select a tag...</option>
+                            <option value="1">Breakfast</option>
+                            <option value="2">Lunch</option>
+                            <option value="3">Dinner</option>
+                            <option value="4">Vegan</option>
+                            <option value="5">Vegetarian</option>
+                            <option value="6">French</option>
+                            <option value="7">Chinese</option>
+                            <option value="8">Japanese</option>
+                            <option value="9">Italian</option>
+                            <option value="10">Greek</option>
+                            <option value="11">Spanish</option>
+                            <option value="12">Mediterranean</option>
+                            <option value="13">Lebanese</option>
+                            <option value="14">Moroccan</option>
+                            <option value="15">Turkish</option>
+                            <option value="16">Thai</option>
+                            <option value="17">Indian</option>
+                            <option value="18">Cajun</option>
+                            <option value="19">Mexican</option>
+                            <option value="20">German</option>
+                            <option value="21">Russian</option>
+                            <option value="22">American</option>
+                        </select>
+                        <button class="btn btn-outline-secondary" type="button" id="add-genre-btn">Add</button>
+                    </div>
+                </div>
+                <hr class="my-5">
+                <div class="row m-2">
+                    <div class="card col-12 col-lg-5" id="card-image-upload">
+                        {{#if recipe_image}}
+                        <img id="output" src="{{recipe_image}}" alt="" class="card-img-top" style="border-radius: 0.25rem;">
+                        <button id="imgUpload" class="p-3" style="
+                            position: absolute;
+                            top: 2em;
+                            right: 2em;
+                            width: 5em; 
+                            height: 5em;">Change Image</button>
+                        {{/if}}
+
+                        {{#unless recipe_image}}
+                        <img id="output" alt="" class="card-img-top">
+                        <button id="imgUpload" class="p-3">Upload an Image</button>
+                        {{/unless}}
+                    </div>
+                    <div class="col-12 col-lg-7 ps-5 d-flex justify-content-center align-items-center" id="card-right">
+                        <div class="row">
+                            <div class="card">
+                                <div class="row">
+                                    <div class="my-3 col-6">
+                                        <label for="prepTimeInput" class="form-label">Prep Time</label>
+                                        <textarea type="text" class="form-control" id="prep-time" aria-describedby="prepTimeHelp" maxlength="25" required rows="1" style="resize: none;">{{prep_time}}</textarea>
+                                    </div>
+                                    <div class="my-3 col-6">
+                                        <label for="cookTimeInput" class="form-label">Cook Time</label>
+                                        <textarea type="text" class="form-control" id="cook-time" aria-describedby="cooktimehelp" maxlength="25" required rows="1" style="resize: none;">{{cook_time}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mt-3">
+                                <div class="my-3 col-12">
+                                    <label for="ingredientsInput" class="form-label">Ingredients</label>
+                                    <div id="ingredientList">
+                                        {{#each Ingredients as |ingredient|}}
+                                        <div class="d-flex flex-row align-items-center">
+                                            <div class="input-group my-2">
+                                                <textarea type="number" aria-label="amount" placeholder="3" class="form-control" style="width: 25%; resize: none;" rows="1">{{ingredient.amount}}</textarea>
+                                                <textarea type="text" aria-label="amount" placeholder="Whole" class="form-control" style="width: 25%; resize: none;" rows="1">{{ingredient.unit}}</textarea>
+                                                <textarea type="text" aria-label="ingredient" placeholder="Onions" class="form-control" style="width: 50%; resize: none;" rows="1">{{ingredient.name}}</textarea>
+                                            </div>
+                                            <button class="btn-close mx-3" data-id="0"></button>
+                                        </div>
+                                        {{/each}}
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <button type="button" class="btn btn-primary mt-3" id='ingredient-btn'>Add an Ingredient</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-5">
+                <div class="row justify-content-center">
+                    <div class="col-10">
+                        <label for="stepsInput" class="form-label">Steps</label>
+                        <div id="step-list">
+                            {{#each Instructions as |instruction|}}
+                            <div class="input-group d-flex align-items-center my-2">
+                                <h5>{{local_step_number}}.</h5>
+                                <textarea type="text" class="form-control mx-3" style="resize: none;">{{instruction.instruction}}</textarea>
+                                <button class="btn-close mx-3" data-id="0"></button>
+                            </div>
+                            {{/each}}
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-primary my-3" id="step-btn">Add a Step</button>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-5">
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-warning" id="create-recipe-btn">Update Recipe!</button>
+                </div>
+            {{!-- </form> --}}
+        </div>
+    </div>
+</main>
+
+<!-- SCRIPT -->
+<script src="https://upload-widget.cloudinary.com/global/all.js"></script>
+<script src="/js/update.js"></script>

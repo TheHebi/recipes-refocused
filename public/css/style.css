@@ -39,6 +39,10 @@
   flex-direction: column;
 }
 
+.custom-nav-group {
+  display: flex;
+}
+
 /* RECIPE LIST */
 
 .custom-list-image {
@@ -341,6 +345,20 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 
+@media screen and (max-width: 768px) {
+  .custom-nav-group {
+    flex-direction: column;
+  }
+  .custom-nav-group li {
+    width: fit-content;
+  }
+  .custom-tab-footer {
+    flex-direction: column;
+    padding-bottom: 1em;
+    padding-top: 1em;
+  }
+}
+
 @media screen and (max-width: 576px) {
   .custom-tab {
     margin: 0 !important;
@@ -356,10 +374,6 @@ input[type="number"]::-webkit-outer-spin-button {
 
   .custom-tab-footer {
     border-radius: 0px;
-
-    flex-direction: column;
-    padding-bottom: 1em;
-    padding-top: 1em;
   }
 
   .home-about-mobile {
