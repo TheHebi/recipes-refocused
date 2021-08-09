@@ -1,13 +1,14 @@
 const router = require("express").Router();
 const sequelize = require("../config/connection");
 const db = require("../models");
+const auth = require('../utils/auth');
 
 // ============================================
 // RECIPE CREATION
 // ============================================
 
 // serve create recipe page
-router.get("/create", (req, res) => {
+router.get("/create", auth, (req, res) => {
     res.render("create", {
         loggedIn: req.session.loggedIn,
     });
@@ -83,7 +84,7 @@ router.post('/createIngredients', async (req, res) => {
         res.status(500).json(err);
     };
 });
-  
+
 // process tags
 router.post('/addTags', async (req, res) => {
     try {

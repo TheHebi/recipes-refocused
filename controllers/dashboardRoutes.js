@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const sequelize = require("../config/connection");
 const db = require("../models");
+const auth = require('../utils/auth');
 
 const findLikes = async (recipeData) => {
     for (let i=0; i<recipeData.length; i++) {
@@ -10,7 +11,7 @@ const findLikes = async (recipeData) => {
     return recipeData
 };
 
-router.get('/dashboard', async (req, res) => {
+router.get('/dashboard', auth, async (req, res) => {
     try {
         if (req.session.user_id) {
             const savedRecipe = await db.User.findByPk(req.session.user_id, {
