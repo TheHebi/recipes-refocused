@@ -13,6 +13,12 @@
   <a href="https://recipes-refocused.herokuapp.com/">Deployed Site</a>
 </h2>
 
+```
+AS A home cook looking to explore new recipes and share my own,
+I WANT to be able to view popular user-written recipes WITHOUT filler text,
+SO THAT I can quickly and easily learn new recipes that other people recommend.
+```
+
 ## Description:
 
 Ready to trim the fat? Recipes Refocused is the newer, faster way explore recipes. On this site all recipes follow the same format so you can get right to learning new kitchen techniques instead of wading through pages of history. Posts are available for anyone to view, but if you'd like to interact with our awesome community, be sure to create an account!
